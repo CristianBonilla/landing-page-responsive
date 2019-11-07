@@ -1,0 +1,23 @@
+# system files
+.DS_Store
+Thumbs.db
+
+# compiled output
+dist/
+
+# misc
+npm-debug.log
+yarn-error.log
+
+# dependencies
+node_modules/
+
+# Editor directories and files
+.idea
+.project
+.classpath
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+.settings/

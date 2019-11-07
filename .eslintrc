@@ -1,0 +1,12 @@
+{
+  "extends": "standard",
+  "rules": {
+    "no-new": "off",
+    "no-unused-vars": "off",
+    "semi": "off",
+    "array-bracket-spacing": "off"
+  },
+  "plugins": [
+    "html"
+  ]
+}
