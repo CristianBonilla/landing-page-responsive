@@ -1,0 +1,39 @@
+.navbar {
+
+  >.navbar-brand {
+    font-size: 1.5rem;
+    padding: 0;
+    margin: 0;
+  }
+
+  >.navbar-toggler {
+    outline: none;
+    border: none;
+    color: $navbar-toggler-icon-color;
+    font-size: 1.7rem;
+    cursor: pointer;
+    padding: 0 10px;
+  }
+
+  >.navbar-collapse {
+    line-height: .8;
+
+    .nav-item>.nav-link {
+      outline: none;
+      font-size: 1rem;
+      font-weight: 500;
+      line-height: 1;
+      color: #414141;
+      transition: color 400ms ease-in-out;
+
+      &:hover {
+        color: #868686;
+      }
+
+      &.active,
+      &:focus {
+        color: $landing-text-color;
+      }
+    }
+  }
+}

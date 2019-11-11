@@ -1,0 +1,5 @@
+@mixin landing-color-box-shadow() {
+  box-shadow: $landing-text-color-box-shadow;
+  -webkit-box-shadow: $landing-text-color-box-shadow;
+  -moz-box-shadow: $landing-text-color-box-shadow;
+}
