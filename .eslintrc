@@ -4,7 +4,9 @@
     "no-new": "off",
     "no-unused-vars": "off",
     "semi": "off",
-    "array-bracket-spacing": "off"
+    "array-bracket-spacing": "off",
+    "space-before-function-paren": "off",
+    "template-curly-spacing": "off"
   },
   "plugins": [
     "html"

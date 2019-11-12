@@ -1,4 +1,5 @@
 @import '~bootstrap/scss/bootstrap';
+@import '~glider-js/glider.min.css';
 
 @import '~@styles/mixins/common';
 
@@ -15,3 +16,7 @@
 @import '~@styles/layout/header';
 @import '~@styles/layout/features';
 @import '~@styles/layout/interactive';
+@import '~@styles/layout/about';
+@import '~@styles/layout/testimonials';
+@import '~@styles/layout/contact';
+@import '~@styles/layout/footer';

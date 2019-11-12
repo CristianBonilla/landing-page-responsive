@@ -11,22 +11,11 @@
   }
 
   .landing-intro-detail {
-    font-size: .875rem;
-    color: #858585;
+    font-size: $font-size-text;
+    color: $grey-color;
 
     ~.btn {
-      color: $white-color;
-      padding: 8px 25px;
-      background-image: linear-gradient(to left, $landing-text-color 50%, $landing-text-color-transition 50%);
-      background-position: 100% 0;
-      background-size: 201% 100%;
-      transition: all 400ms ease-in;
-      @include landing-color-box-shadow();
-
-      &:hover,
-      &:focus {
-        background-position: 0 0;
-      }
+      @include landing-button();
     }
   }
 }

@@ -23,6 +23,7 @@
     "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
     "core-js": "^3.4.0",
+    "glider-js": "^1.7.1",
     "jquery": "^3.4.1",
     "popper.js": "^1.16.0"
   },

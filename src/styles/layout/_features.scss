@@ -3,7 +3,7 @@
   background-color: transparent;
 
   .features-title {
-    font-size: 1.8rem;
+    font-size: $font-size-title;
     font-weight: 800;
 
     ~.container-fluid {
@@ -34,14 +34,14 @@
       }
 
       >.card-text {
-        font-size: .875rem;
-        color: #A8A8A8;
+        font-size: $font-size-text;
+        color: $grey-color;
       }
 
       >.card-link {
         outline: none;
         color: $landing-text-color;
-        font-size: .875rem;
+        font-size: $font-size-text;
         transition: color 300ms ease-in-out;
 
         &:hover,

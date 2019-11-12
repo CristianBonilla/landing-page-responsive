@@ -35,7 +35,8 @@ const resolve = {
     '@': paths.src,
     '@fonts': path.resolve(paths.assets, 'fonts'),
     '@images': path.resolve(paths.assets, 'images'),
-    '@styles': path.resolve(paths.src, 'styles')
+    '@styles': path.resolve(paths.src, 'styles'),
+    '@services': path.resolve(paths.src, 'services')
   },
   extensions: [ '.js', '.jsx' ]
 };
