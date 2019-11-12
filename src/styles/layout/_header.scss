@@ -3,6 +3,10 @@
 
   .landing-intro-image {
     max-height: 400px;
+
+    &.rotate-scale-up {
+      @include rotate-scale-up();
+    }
   }
 
   .landing-intro-title {

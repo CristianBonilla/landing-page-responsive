@@ -18,3 +18,8 @@
     background-position: 0 0;
   }
 }
+
+@mixin rotate-scale-up() {
+  -webkit-animation: rotate-scale-up 0.65s linear both;
+  animation: rotate-scale-up 0.65s linear both;
+}

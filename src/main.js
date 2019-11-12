@@ -1,10 +1,19 @@
+import 'jquery.easing';
 import 'bootstrap/js/dist/button';
 import 'bootstrap/js/dist/dropdown';
 import 'bootstrap/js/dist/collapse';
+import 'bootstrap/js/dist/scrollspy';
 
 import Glider from 'glider-js';
+import scrolling from '@/scripts/scrolling';
+import posts from '@services/posts-service';
 
-import testimonials from '@services/posts-service';
+const wrapper = document.querySelector('.wrapper');
+
+function disableDragStart() {
+  wrapper.querySelectorAll('img')
+    .forEach(i => i.addEventListener('dragstart', e => e.preventDefault()));
+}
 
 function autoPlay(slider, miliseconds) {
   slider.isLastSlide = () => slider.page >= slider.dots.childElementCount - 1;
@@ -22,7 +31,7 @@ function autoPlay(slider, miliseconds) {
   slide();
 }
 
-const instance = testimonials.getSingleton;
+const instance = posts.getSingleton;
 const postsList = instance.postsList();
 
 function getRandom(array, max) {
@@ -81,4 +90,12 @@ postsList.then(posts => {
     dots: '#dots'
   });
   autoPlay(glider, 5000);
+  disableDragStart();
+
+  setTimeout(() => {
+    wrapper.querySelector('.landing-intro-image')
+      .classList.add('rotate-scale-up');
+  }, 100);
 });
+
+document.addEventListener('readystatechange', scrolling);

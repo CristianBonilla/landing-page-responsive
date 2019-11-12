@@ -30,10 +30,15 @@
         color: #868686;
       }
 
-      &.active,
-      &:focus {
+      &.active {
         color: $landing-text-color;
       }
     }
+  }
+}
+
+@media (max-width: 575px) {
+  .navbar {
+    box-shadow: none !important;
   }
 }

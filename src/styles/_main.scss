@@ -4,14 +4,15 @@
 @import '~@styles/mixins/common';
 
 @import '~@styles/base/variables';
+@import '~@styles/base/animations';
 @import '~@styles/base/misc';
 @import '~@styles/base/size';
+@import '~@styles/base/wrapper';
 
 @import '~@styles/themes/flaticon';
 @import '~@styles/themes/icomoon';
 @import '~@styles/themes/trueno';
 
-@import '~@styles/layout/wrapper';
 @import '~@styles/layout/navbar';
 @import '~@styles/layout/header';
 @import '~@styles/layout/features';

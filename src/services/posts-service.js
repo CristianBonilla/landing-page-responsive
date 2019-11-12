@@ -8,6 +8,7 @@ export default {
       this.instance = {
         postsList: async () => {
           const posts = await serviceFactoryInstance.get('/', HttpGetContext.get);
+          console.log('Api request test', posts);
 
           return posts;
         }
