@@ -4,6 +4,7 @@ Thumbs.db
 
 # compiled output
 dist/
+build/
 
 # misc
 npm-debug.log
@@ -13,6 +14,7 @@ yarn-error.log
 node_modules/
 
 # Editor directories and files
+.vscode
 .idea
 .project
 .classpath
