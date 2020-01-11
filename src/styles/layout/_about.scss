@@ -1,0 +1,23 @@
+.about {
+  min-height: 80vh;
+
+  .about-title {
+    font-size: $font-size-title;
+    font-weight: 800;
+  }
+
+  .about-image {
+    max-height: 300px;
+  }
+
+  .about-detail {
+    padding: 1rem 0;
+    font-size: $font-size-text;
+    font-weight: 400;
+    color: $grey-color;
+  }
+
+  .btn {
+    @include landing-button();
+  }
+}

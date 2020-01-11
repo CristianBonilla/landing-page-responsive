@@ -1,0 +1,16 @@
+.contact {
+  min-height: 100vh;
+
+  .contact-title {
+    font-size: $font-size-title;
+    font-weight: 800;
+  }
+
+  .contact-content {
+    max-width: 600px;
+
+    .btn[type="submit"] {
+      @include landing-button();
+    }
+  }
+}

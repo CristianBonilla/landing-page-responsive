@@ -1,26 +1,59 @@
 {
   "name": "landing-page-responsive",
   "version": "1.0.0",
-  "description": "Landing page responsive con HTML5, SCSS y JavaScript ES6+",
+  "author": {
+    "name": "Cristian Bonilla",
+    "email": "cristiancamilo10_95@outlook.com",
+    "url": "https://www.linkedin.com/in/cristian-camilo-bonilla-20732516b"
+  },
   "repository": {
     "type": "git",
     "url": "git@github.com:CristianBonilla/landing-page-responsive"
   },
-  "author": {
-    "email": "cristiancamilo10_95@outlook.com",
-    "name": "Cristian Bonilla"
-  },
+  "description": "Creación de un landing-page-responsive con JavaScript ES6+, CSS3, HTML5 y la ayuda de Webpack para el builder, con el uso de distintas dependencias necesarias para el Frontend",
   "license": "UNLICENSED",
   "private": true,
-  "engines": {
-    "node": ">=11.15.0",
-    "npm": ">=6.7.0",
-    "yarn": ">=1.17.0"
-  },
   "scripts": {
-    "sass": "sass styles/scss:styles/css --style=compressed --charset --embed-source-map --watch --stop-on-error"
+    "watch": "webpack --mode development --watch",
+    "dev": "webpack-dev-server --mode development --open --hot --inline",
+    "prod": "webpack --mode production --progress --hide-modules"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.7.2",
+    "axios": "^0.19.0",
+    "bootstrap": "^4.3.1",
+    "core-js": "^3.4.0",
+    "glider-js": "^1.7.1",
+    "jquery": "^3.4.1",
+    "jquery.easing": "^1.4.1",
+    "popper.js": "^1.16.0"
   },
   "devDependencies": {
-    "sass": "^1.24.4"
+    "@babel/core": "^7.7.2",
+    "@babel/plugin-transform-runtime": "^7.6.2",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/register": "^7.7.0",
+    "babel-loader": "^8.0.6",
+    "compression-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.2.0",
+    "eslint": "^6.6.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-loader": "^3.0.2",
+    "eslint-plugin-html": "^6.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "file-loader": "^4.2.0",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "node-sass": "^4.13.0",
+    "sass-loader": "^8.0.0",
+    "script-ext-html-webpack-plugin": "^2.1.4",
+    "style-loader": "^1.0.0",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.9.0"
   }
 }
