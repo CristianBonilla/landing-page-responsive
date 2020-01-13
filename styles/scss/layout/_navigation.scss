@@ -19,11 +19,11 @@
     line-height: 1;
     white-space: nowrap;
     color: $title-color;
-    font-size: calc(#{ $title-size } + .5rem);
+    font-size: calc(#{ $title-size } + .3rem);
     padding: 0 0 8px;
 
     >b {
-      font-size: calc(#{ $title-size } + .7rem);
+      font-size: calc(#{ $title-size } + .5rem);
       color: $cyan-color;
     }
   }

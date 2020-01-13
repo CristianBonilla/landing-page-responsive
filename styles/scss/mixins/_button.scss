@@ -1,3 +1,9 @@
+@mixin cyan-shadow {
+  box-shadow: 0px 0px 10px 0px $cyan-shadow-color;
+  -webkit-box-shadow: 0px 0px 10px 0px $cyan-shadow-color;
+  -moz-box-shadow: 0px 0px 10px 0px $cyan-shadow-color;
+}
+
 @mixin landing-button {
   margin-top: 1.5rem;
   font-size: calc(#{ $default-font-size } - .1rem);
@@ -10,9 +16,7 @@
   background-position: 100% 0;
   background-size: 200% 100%;
   transition: all 400ms ease-in;
-  box-shadow: 0px 0px 10px 0px $cyan-shadow-color;
-  -webkit-box-shadow: 0px 0px 10px 0px $cyan-shadow-color;
-  -moz-box-shadow: 0px 0px 10px 0px $cyan-shadow-color;
+  @include cyan-shadow;
 
   &:hover,
   &:focus {

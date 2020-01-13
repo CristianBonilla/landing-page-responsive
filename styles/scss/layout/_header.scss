@@ -12,9 +12,10 @@
     min-height: 3rem;
     line-height: 1.2;
 
-    >a {
+    >h2 {
       color: $title-color;
       font-size: $title-size;
+      font-weight: 500;
 
       >b {
         font-size: calc(#{ $title-size } + .2rem);
