@@ -18,7 +18,7 @@
     "yarn": ">=1.17.0"
   },
   "scripts": {
-    "sass": "sass styles/scss:styles/css --style=compressed --charset --embed-sources --watch --stop-on-error"
+    "sass": "sass styles/scss:styles/css --style=compressed --charset --embed-source-map --watch --stop-on-error"
   },
   "devDependencies": {
     "sass": "^1.24.4"
