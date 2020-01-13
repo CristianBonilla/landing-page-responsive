@@ -1,0 +1,28 @@
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: $white-color;
+
+  &_content {
+    position: relative;
+    padding: 15px 35px;
+    text-align: center;
+  }
+
+  &_text {
+    font-size: calc(#{ $default-font-size } - .2rem);
+    color: $footer-text-color;
+    margin: 0;
+    opacity: 1;
+    transition: opacity 600ms ease-in-out;
+
+    >strong {
+      font-size: $default-font-size;
+    }
+  }
+
+  &:hover &_text {
+    opacity: .7;
+  }
+}

@@ -1,1 +1,37 @@
 $fonts-url: '../../../assets/fonts';
+
+$sans-serif-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+
+$trueno-family-r: 'truenoregular';
+$trueno-family-sb: 'truenosemibold';
+$trueno-family-b: 'truenobold';
+$trueno-family-eb: 'truenoextrabold';
+
+$default-text-color: #2D3033;
+$default-font-size: 1rem;
+$default-line-height: 1.5;
+
+$white-color: #FFFFFF;
+$background-color: #F6F6F6;
+
+$navigation-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+
+$link-navigation-color: #343434;
+$link-navigation-transition-color: #A19B9B;
+
+$cyan-color: 	#00D2B5;
+$cyan-transition-color: #47E0CA;
+
+$title-color:  #1C1C1C;
+$title-size: 1.6rem;
+
+$subtitle-color: #616161;
+$text-color: #8a9197;
+$placeholder-text-color: #D6D9DB;
+
+$done-color: #A2D16A;
+
+$footer-text-color: #8F8F8F;
+
+$transition-opacity: opacity 600ms ease-in-out;
+$transition-color: color 600ms ease-in-out;

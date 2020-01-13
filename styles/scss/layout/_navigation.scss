@@ -1,0 +1,128 @@
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 2;
+  padding: .5rem 1rem;
+  background-color: $white-color;
+  border: none;
+
+  &_title {
+    display: inline-block;
+    margin-right: 1rem;
+    line-height: 1;
+    white-space: nowrap;
+    color: $title-color;
+    font-size: calc(#{ $title-size } + .5rem);
+    padding: 0 0 8px;
+
+    >b {
+      font-size: calc(#{ $title-size } + .7rem);
+      color: $cyan-color;
+    }
+  }
+
+  &_content {
+    align-items: center;
+    flex-grow: 1;
+    flex-basis: 100%;
+    display: none;
+  }
+
+  &_menu {
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    margin: 0 auto;
+    list-style: none;
+
+    &_item {
+      padding: 0;
+
+      >a {
+        display: block;
+        color: $link-navigation-color;
+        padding: .5rem 1rem;
+        line-height: 1;
+        font-size: calc(#{ $default-font-size } - .1rem);
+        transition: $transition-color;
+      }
+
+      &:hover>a,
+      &:focus>a {
+        color: $link-navigation-transition-color;
+      }
+    }
+  }
+
+  &_toggler {
+    padding: .2rem .7rem;
+    font-size: 1.2rem;
+    line-height: 1;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    color: #474747;
+    font-size: 1.7rem;
+    cursor: pointer;
+    padding: 0 1rem;
+  }
+
+  &_title,
+  &_toggler {
+    transition: $transition-opacity;
+
+    &:hover,
+    &:focus {
+      opacity: .7;
+      text-decoration: none;
+    }
+  }
+}
+
+@media (min-width: 576px) {
+  .navigation {
+    justify-content: flex-start;
+    flex-flow: row nowrap;
+    padding: 0 1rem;
+    box-shadow: $navigation-shadow;
+
+    &_title {
+      padding: .3rem 0;
+      font-size: calc(#{ $default-font-size } + .2rem);
+      display: none;
+
+      >b {
+        font-size: calc(#{ $default-font-size } + .4rem);
+      }
+    }
+
+    &_content {
+      display: flex;
+      flex-basis: auto;
+      justify-content: center;
+    }
+
+    &_menu {
+      flex-direction: row;
+
+      &_item {
+        padding: .5rem 0;
+
+        >a {
+          padding-right: .5rem;
+          padding-left: .5rem;
+        }
+      }
+    }
+
+    &_toggler {
+      display: none;
+    }
+  }
+}

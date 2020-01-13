@@ -9,7 +9,9 @@
     <meta name="docsearch:language" content="es">
     <meta name="docsearch:version" content="1.0.0">
     <title>Landing Page</title>
+    <link type="image/x-icon" rel="shortcut icon" href="assets/favicon.ico">
     <link type="text/css" rel="stylesheet" href="styles/css/base/normalize.css">
+    <link type="text/css" rel="stylesheet" href="styles/css/base/glide.core.css">
     <link type="text/css" rel="stylesheet" href="styles/css/main.css">
   </head>
   <body>
@@ -17,16 +19,13 @@
       <strong>Lo sentimos pero el "landing page responsive" no funciona sin JavaScript habilitado. Por favor, activelo para continuar</strong>
     </noscript>
     <div class="wrapper">
-      <!-- Header -->
-      <header class="header">
-        <div class="header_title">
-          <a href="javascript:void(0)">Landerz<b>.</b></a>
-        </div>
-      </header>
       <!-- Navigation -->
       <nav class="navigation">
+        <a href="javascript:void(0)" class="navigation_title">Landerz<b>.</b></a>
+        <button type="button" id="navigation_toggler" class="navigation_toggler">
+          <i class="icon-navicon"></i>
+        </button>
         <div class="navigation_content">
-          <button type="button" id="navigation_toggler" class="navigation_toggler"></button>
           <ul class="navigation_menu">
             <li class="navigation_menu_item">
               <a href="#home">Home</a>
@@ -49,8 +48,14 @@
           </ul>
         </div>
       </nav>
+      <!-- Header -->
+      <header class="header">
+        <div class="header_title">
+          <a href="javascript:void(0)">Landerz<b>.</b></a>
+        </div>
+      </header>
       <!-- Home -->
-      <main id="home" class="home">
+      <!-- <main id="home" class="home">
         <div class="home_content">
           <div class="home_intro">
             <h1 class="home_intro_title">Grow Your Business Faster</h1>
@@ -63,9 +68,9 @@
             <img src="assets/images/landing_1.png" alt="">
           </figure>
         </div>
-      </main>
+      </main> -->
       <!-- Features -->
-      <section id="features" class="features">
+      <!-- <section id="features" class="features">
         <div class="features_content">
           <h4 class="features_title">Features</h4>
           <article class="poster">
@@ -165,9 +170,9 @@
             </div>
           </article>
         </div>
-      </section>
+      </section> -->
       <!-- Prototypes -->
-      <section id="prototypes" class="prototypes">
+      <!-- <section id="prototypes" class="prototypes">
         <div class="protypes_slider">
           <figure class="protypes_image">
             <img src="assets/images/prototypes/do_ui_kit_download_cta_floating_devices-2x.png" alt="">
@@ -203,9 +208,9 @@
             </div>
           </article>
         </div>
-      </section>
+      </section> -->
       <!-- About Us -->
-      <section id="about-us" class="about-us">
+      <!-- <section id="about-us" class="about-us">
         <h4 class="about-us_title">About Us</h4>
         <div class="about-us_slider">
           <figure class="about-us_image">
@@ -217,13 +222,58 @@
           <p class="about-us_text">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo rerum iure officia earum reprehenderit quaerat et facilis sed obcaecati odio non dolor temporibus nam perspiciatis, minima officiis optio aut libero?
           </p>
-          <button type="button" class="about-us_content-more">Learn more</button>
+          <button type="button" class="about-us_content_more">Learn more</button>
         </div>
-      </section>
+      </section> -->
+      <!-- Testimonials -->
+      <!-- <section id="testimonials" class="testimonials">
+        <h4 class="testimonials_title">Testimonials</h4>
+        <div class="testimonials_slider">
+          <ul class="testimonials_slider_menu"></ul>
+        </div>
+      </section> -->
+      <!-- Contact -->
+      <!-- <section id="contact" class="contact">
+        <div class="contact_content">
+          <h4 class="contact_title">Contact Form</h4>
+          <form autocomplete="off" spellcheck="false" class="form">
+            <div class="form_wrap">
+              <div class="form_group">
+                <label for="first-name">First Name</label>
+                <input type="text" id="first-name">
+              </div>
+              <div class="form_group">
+                <label for="last-name">Last Name</label>
+                <input type="text" id="last-name">
+              </div>
+            </div>
+            <div class="form_group">
+              <label for="email">Email</label>
+              <input type="email" id="email">
+            </div>
+            <div class="form_group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject">
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" rows="5"></textarea>
+            </div>
+            <button type="submit" class="contact_submit">Send Message</button>
+          </form>
+        </div>
+      </section> -->
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer_content">
+          <p class="footer_text">
+            Copyright <strong>&copy;</strong> 2019 All rights reserverd
+          </p>
+        </div>
+      </footer>
     </div>
 
     <script type="text/javascript" src="js/vendor/axios.min.js"></script>
     <script type="text/javascript" src="js/vendor/rxjs.umd.min.js"></script>
-    <script type="text/javascript" src="js/vendor/tiny-slider.min.js"></script>
   </body>
 </html>

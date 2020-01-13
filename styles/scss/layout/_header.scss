@@ -1,0 +1,30 @@
+.header {
+  background-color: $white-color;
+  padding: 0 3rem;
+  border: none;
+  margin-top: 46px;
+
+  &_title {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 3rem;
+    line-height: 1.2;
+
+    >a {
+      color: $title-color;
+      font-size: $title-size;
+
+      >b {
+        font-size: calc(#{ $title-size } + .2rem);
+        color: $cyan-color;
+      }
+    }
+  }
+}
+
+@media (max-width: 575px) {
+  .header {
+    display: none;
+  }
+}
