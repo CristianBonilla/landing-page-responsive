@@ -13,7 +13,7 @@ yarn-error.log
 # dependencies
 node_modules/
 
-# editor directories and files
+# Editor directories and files
 .vscode
 .idea
 .project
