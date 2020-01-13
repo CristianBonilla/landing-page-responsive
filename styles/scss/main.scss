@@ -4,6 +4,9 @@
 @import 'themes/trueno';
 @import 'themes/icomoon';
 
-@import 'layout/header';
+@import 'mixins/button';
+
 @import 'layout/navigation';
+@import 'layout/header';
+@import 'layout/home';
 @import 'layout/footer';

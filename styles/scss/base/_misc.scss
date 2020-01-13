@@ -1,11 +1,9 @@
-* {
-
-  &::before,
-  &::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
@@ -53,4 +51,12 @@ button {
   top: 0;
   min-height: 100vh;
   height: auto;
+  padding-bottom: 54px;
+  margin: 0;
+}
+
+@media (min-width: 575px) {
+  .wrapper {
+    min-height: calc(100vh - 46px);
+  }
 }

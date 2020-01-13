@@ -1,0 +1,134 @@
+.home {
+  min-height: 100vh;
+  background-color: $white-color;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 60px 0 20px;
+
+  &_content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: wrap;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  &_intro {
+    position: relative;
+    padding: 0 1rem;
+    width: 100%;
+    order: 1;
+    margin: 1rem 0 0;
+
+    &_title {
+      line-height: 1.2;
+      font-family: $trueno-family-eb;
+      color: $title-color;
+      font-size: $title-size-l;
+      margin: 0 auto .5rem;
+    }
+
+    &_description {
+      font-size: calc(#{ $default-font-size } - .2rem);
+      color: $text-color;
+      margin-bottom: 1rem;
+    }
+
+    &_started {
+      @include landing-button;
+    }
+  }
+
+  &_image {
+    position: relative;
+    padding: 0 1rem;
+    width: 100%;
+    overflow: hidden;
+    margin: 0 0 1rem;
+    order: 0;
+
+    >img {
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      width: auto;
+      max-height: 300px;
+      float: none;
+    }
+  }
+}
+
+@media (min-width: 576px) {
+  .home {
+    min-height: calc(100vh - 94px);
+    padding: 0;
+
+    &_content {
+      flex-direction: row;
+    }
+
+    &_intro {
+      flex: 0 0 33.3%;
+      max-width: 33.3%;
+      order: 0;
+      padding: 0 1rem 0;
+      margin: 0;
+
+      &_title {
+        font-size: $title-size-el;
+      }
+    }
+
+    &_image {
+      flex: 0 0 66.6%;
+      max-width: 66.6%;
+      order: 1;
+      padding: 0;
+      margin: 0;
+
+      >img {
+        max-height: 400px;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .home {
+
+    &_intro {
+      flex: 0 0 38%;
+      max-width: 38%;
+      padding: 0 3rem 0;
+    }
+
+    &_image {
+      flex: 0 0 62%;
+      max-width: 62%;
+
+      >img {
+        max-height: 500px;
+        margin: auto;
+        float: right;
+      }
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .home {
+
+    &_intro {
+      padding: 0 6rem 0;
+    }
+
+    &_image {
+
+      >img {
+        max-height: 550px;
+      }
+    }
+  }
+}
