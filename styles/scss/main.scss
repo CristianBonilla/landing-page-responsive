@@ -1,27 +1,13 @@
 @import 'base/variables';
+@import 'base/misc';
 
 @import 'themes/trueno';
 @import 'themes/icomoon';
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 @import 'mixins/button';
 
 @import 'layout/navigation';
 @import 'layout/header';
 @import 'layout/home';
-<<<<<<< HEAD
 @import 'layout/features';
-=======
-@import 'layout/header';
-@import 'layout/navigation';
->>>>>>> parent of a222a03... Maquetación de la sección principal del landing page responsive
-=======
->>>>>>> parent of 6a5d49f... Maquetación de la sección de características
 @import 'layout/footer';
-=======
-* {
-  margin: 0;
-  padding: 0;
-}
->>>>>>> parent of 0cb53e5... Cambio de libreria slider y maquetar el header, navegation y footer del landing page responsive
