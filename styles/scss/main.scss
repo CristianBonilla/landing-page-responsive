@@ -1,9 +1,9 @@
 @import 'base/variables';
-@import 'base/misc';
 
 @import 'themes/trueno';
 @import 'themes/icomoon';
 
+<<<<<<< HEAD
 @import 'mixins/button';
 
 @import 'layout/navigation';
@@ -11,3 +11,9 @@
 @import 'layout/home';
 @import 'layout/features';
 @import 'layout/footer';
+=======
+* {
+  margin: 0;
+  padding: 0;
+}
+>>>>>>> parent of 0cb53e5... Cambio de libreria slider y maquetar el header, navegation y footer del landing page responsive
