@@ -5,7 +5,7 @@
   padding: 3rem 0;
 
   &_title {
-    font-size: calc(#{ $title-size } + .2rem);
+    font-size: $title-size-l;
     font-family: $trueno-family-eb;
     margin: 0 0 3rem;
     line-height: 1.2;
@@ -107,7 +107,7 @@
       padding-right: 8rem;
 
       &_title {
-        font-size: calc(#{ $title-size } + .2rem);
+        font-size: $title-size-l;
       }
     }
   }

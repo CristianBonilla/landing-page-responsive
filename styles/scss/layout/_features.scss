@@ -6,7 +6,7 @@
 
   &_title {
     font-family: $trueno-family-eb;
-    font-size: calc(#{ $title-size } + .2rem);
+    font-size: $title-size-l;
     text-align: center;
     margin: 0 0 3rem;
     line-height: 1.2;
@@ -64,7 +64,7 @@
       }
 
       blockquote {
-        line-height: 20px;
+        line-height: 1.8;
         font-size: $text-size;
       }
 

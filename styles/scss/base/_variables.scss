@@ -12,6 +12,7 @@ $default-font-size: 1rem;
 $default-line-height: 1.5;
 
 $white-color: #FFFFFF;
+
 $background-color: #F6F6F6;
 
 $navigation-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
@@ -41,7 +42,10 @@ $placeholder-text-color: #D6D9DB;
 
 $done-color: #A2D16A;
 
-$border-shadow-color: rgba(0,0,0,.125);
+$card-border-color: rgba(0,0,0,.125);
+$card-box-shadow: 0 .3rem .5rem $card-border-color;
+
+$image-box-shadow: 0px 6px 25px -10px rgba(0,0,0,0.75);
 
 $footer-text-color: #8F8F8F;
 
