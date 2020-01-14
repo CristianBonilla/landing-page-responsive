@@ -34,13 +34,13 @@
               <a href="#features">Features</a>
             </li>
             <li class="navigation_menu_item">
-              <a href="#blog">Blog</a>
-            </li>
-            <li class="navigation_menu_item">
               <a href="#about-us">About Us</a>
             </li>
             <li class="navigation_menu_item">
               <a href="#testimonials">Testimonials</a>
+            </li>
+            <li class="navigation_menu_item">
+              <a href="javascript:void(0)">Blog</a>
             </li>
             <li class="navigation_menu_item">
               <a href="#contact">Contact</a>
@@ -172,12 +172,14 @@
         </div>
       </section>
       <!-- Prototypes -->
-      <section id="prototypes" class="prototypes">
-        <div class="prototypes_slider">
-          <figure class="prototypes_image">
-            <img src="assets/images/prototypes/do_ui_kit_download_cta_floating_devices-2x.png" alt="">
-          </figure>
-        </div>
+      <section class="prototypes">
+        <ul class="prototypes_slider">
+          <li>
+            <figure class="prototypes_image">
+              <img src="assets/images/prototypes/do_ui_kit_download_cta_floating_devices-2x.png" alt="">
+            </figure>
+          </li>
+        </ul>
         <div class="prototypes_content">
           <h4 class="prototypes_title">Create interactive prototypes</h4>
           <p class="prototypes_text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit ducimus ab, harum tempore laborum excepturi!</p>
@@ -216,11 +218,13 @@
       <section id="about-us" class="about-us">
         <h4 class="about-us_title">About Us</h4>
         <div class="about-us_container">
-          <div class="about-us_slider">
-            <figure class="about-us_image">
-              <img src="assets/images/about/about_1.jpg" alt="">
-            </figure>
-          </div>
+          <ul class="about-us_slider">
+            <li>
+              <figure class="about-us_image">
+                <img src="assets/images/about/about_1.jpg" alt="">
+              </figure>
+            </li>
+          </ul>
           <div class="about-us_content">
             <h4 class="about-us_content_title">Create interactive prototypes</h4>
             <p class="about-us_content_text">
@@ -250,9 +254,10 @@
         </ol>
       </section>
       <!-- Contact -->
-      <!-- <section id="contact" class="contact">
+      <section id="contact" class="contact">
+        <h4 class="contact_title">Get In Touch</h4>
         <div class="contact_content">
-          <h4 class="contact_title">Contact Form</h4>
+          <h5 class="contact_content_title">Contact Form</h5>
           <form autocomplete="off" spellcheck="false" class="form">
             <div class="form_wrap">
               <div class="form_group">
@@ -272,14 +277,14 @@
               <label for="subject">Subject</label>
               <input type="text" id="subject">
             </div>
-            <div class="form-group">
+            <div class="form_group">
               <label for="message">Message</label>
-              <textarea id="message" rows="5"></textarea>
+              <textarea id="message" cols="30" rows="5" placeholder="Write your notes or questions here..."></textarea>
             </div>
-            <button type="submit" class="contact_submit">Send Message</button>
+            <button type="submit" class="form_submit">Send Message</button>
           </form>
         </div>
-      </section> -->
+      </section>
       <!-- Footer -->
       <footer class="footer">
         <div class="footer_content">

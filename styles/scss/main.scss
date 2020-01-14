@@ -6,6 +6,9 @@
 
 @import 'mixins/button';
 
+@import 'modules/card';
+@import 'modules/form';
+
 @import 'layout/navigation';
 @import 'layout/header';
 @import 'layout/home';
@@ -13,7 +16,5 @@
 @import 'layout/prototypes';
 @import 'layout/about';
 @import 'layout/testimonials';
+@import 'layout/contact';
 @import 'layout/footer';
-
-@import 'modules/card';
-@import 'modules/form';

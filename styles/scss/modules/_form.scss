@@ -1,0 +1,78 @@
+.form {
+  padding: 0 1.2rem;
+  margin: .5rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background-color: $white-color;
+
+  &_group {
+    padding: 0 1rem;
+    margin: 0 0 1rem;
+    width: 100%;
+
+    label {
+      display: inline-block;
+      margin-bottom: .5rem;
+      font-size: .9rem;
+      font-weight: 400;
+      color: $title-color;
+    }
+
+    input,
+    textarea {
+      display: block;
+      width: 100%;
+      height: 2.2rem;
+      padding: .3rem .7rem;
+      font-size: $text-size;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #495057;
+      background-color: $white-color;
+      border: 1px solid #CED4DA;
+      border-radius: .2rem;
+
+      &::placeholder {
+        color: $placeholder-text-color;
+      }
+
+      &::-webkit-input-placeholder {
+        color: $placeholder-text-color;
+      }
+    }
+
+    textarea {
+      overflow: auto;
+      height: auto;
+      resize: vertical;
+    }
+  }
+
+  &_wrap {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+
+    >.form_group {
+      width: 100%;
+    }
+  }
+
+  &_submit {
+    @include landing-button;
+    margin: 0 1rem 2rem;
+  }
+}
+
+@media (min-width: 576px) {
+  .form {
+
+    &_wrap {
+
+      >.form_group {
+        width: calc(100% / 2);
+      }
+    }
+  }
+}

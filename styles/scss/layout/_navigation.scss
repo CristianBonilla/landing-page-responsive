@@ -48,7 +48,8 @@
       >a {
         display: block;
         color: $link-navigation-color;
-        padding: .5rem 1rem;
+        padding: .8rem 0;
+        text-align: center;
         line-height: 1;
         font-size: calc(#{ $default-font-size } - .1rem);
         transition: $transition-color;
@@ -116,8 +117,7 @@
         padding: .5rem 0;
 
         >a {
-          padding-right: .5rem;
-          padding-left: .5rem;
+          padding: .5rem;
         }
       }
     }

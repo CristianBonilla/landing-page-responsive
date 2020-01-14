@@ -26,9 +26,10 @@
     flex-direction: column;
     flex-wrap: wrap;
     width: 100%;
+    list-style: none;
 
     >blockquote {
-      line-height: 1.8;
+      line-height: $text-line-height;
       width: 100%;
       text-align: center;
 

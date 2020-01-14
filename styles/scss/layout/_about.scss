@@ -28,6 +28,10 @@
 
   &_slider {
     margin-bottom: .5rem;
+
+    >li {
+      list-style: none;
+    }
   }
 
   &_content {
@@ -44,7 +48,7 @@
     &_text {
       font-size: $text-size;
       color: $text-light-color;
-      line-height: 1.8;
+      line-height: $text-line-height;
       padding: .5rem 0 0;
       margin-bottom: 1rem;
     }
