@@ -67,11 +67,8 @@
 }
 
 @media (min-width: 576px) {
-  .testimonials {
-
-    &_slider {
-      width: 85%;
-    }
+  .testimonials_slider {
+    width: 85%;
   }
 }
 
@@ -93,14 +90,11 @@
 }
 
 @media (min-width: 992px) {
-  .testimonials {
+  .testimonials_item {
 
-    &_item {
-
-      >blockquote {
-        padding: 0 2rem;
-        width: 75%;
-      }
+    >blockquote {
+      padding: 0 2rem;
+      width: 75%;
     }
   }
 }

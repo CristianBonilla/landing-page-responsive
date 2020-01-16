@@ -16,6 +16,7 @@ scrolling.apply();
 const { Glide, imagesLoaded } = libraries;
 
 const sliderOptionsDefault = {
+  type: 'carousel',
   autoplay: 5000,
   hoverpause: false,
   gap: 0,
@@ -46,17 +47,16 @@ function applySlider(selector, items, options = { }) {
     p + `<li class="glide__slide">${ c }</li>`, '');
 
   const sliderTemplate = `
-  <div class="glide">
-    <div class="glide__track" data-glide-el="track">
-      <ul class="glide__slides">${ itemsTemplate }</ul>
-    </div>
-  </div>
-  `;
+    <div class="glide">
+      <div class="glide__track" data-glide-el="track">
+        <ul class="glide__slides">${ itemsTemplate }</ul>
+      </div>
+    </div>`;
 
   const element = document.querySelector(selector);
   element.innerHTML = sliderTemplate;
 
-  const instance = new Glide(selector, {
+  const instance = new Glide(`${ selector }>.glide`, {
     ...sliderOptionsDefault,
     ...options
   });
@@ -69,7 +69,7 @@ const prototypesTemplate = prototypes.map(p => `
     <img src="${ p }" alt="">
   </figure>`);
 const prototypesSlider = applySlider(
-  '.prototypes_slider',
+  '.prototypes .prototypes_slider',
   prototypesTemplate);
 prototypesSlider.mount({ sliderAutoHeight });
 
@@ -78,6 +78,6 @@ const aboutTemplate = about.map(a => `
     <img src="${ a }" alt="">
   </figure>`);
 const aboutSlider = applySlider(
-  '.about-us_slider',
+  '.about-us .about-us_slider',
   aboutTemplate);
 aboutSlider.mount({ sliderAutoHeight });

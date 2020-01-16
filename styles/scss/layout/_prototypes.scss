@@ -90,20 +90,14 @@
 }
 
 @media (min-width: 768px) {
-  .prototypes {
-
-    &_content {
-      padding-right: 2rem;
-      padding-left: 2rem;
-    }
+  .prototypes_content {
+    padding-right: 2rem;
+    padding-left: 2rem;
   }
 }
 
 @media (min-width: 992px) {
-  .prototypes {
-
-    &_content {
-      padding-right: 8rem;
-    }
+  .prototypes_content {
+    padding-right: 8rem;
   }
 }

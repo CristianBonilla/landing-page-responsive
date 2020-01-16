@@ -31,7 +31,6 @@ export class Scrolling {
 
   scrolling($anchorElement, id) {
     const originalTop = this.distanceToTop($anchorElement);
-    console.log($anchorElement, $anchorElement.getBoundingClientRect());
     window.scrollBy({
       top: originalTop,
       left: 0,
@@ -39,7 +38,6 @@ export class Scrolling {
     });
     const checkIfDone = setInterval(() => {
       if (this.distanceToTop($anchorElement) === 0 || this.atBottom()) {
-        console.log(true);
         this.history($anchorElement, id);
         clearInterval(checkIfDone);
       }
