@@ -47,6 +47,7 @@
 
         &.flip {
           transform: scaleX(-1);
+          -webkit-transform: scale3d(-1);
         }
       }
     }

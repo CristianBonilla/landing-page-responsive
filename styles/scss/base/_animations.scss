@@ -1,0 +1,38 @@
+// @-webkit-keyframes show {
+//   from {
+//     transform: translate3d(0, -100%, 0);
+//     -webkit-transform: translate3d(0, -100%, 0);
+//     visibility: visible;
+//     max-height: 0;
+//   }
+
+//   to {
+//     transform: translate3d(0, 0, 0);
+//     -webkit-transform: translate3d(0, 0, 0);
+//     max-height: 238px;
+//   }
+// }
+
+// @keyframes show {
+//   from {
+//     transform: translate3d(0, -100%, 0);
+//     -webkit-transform: translate3d(0, -100%, 0);
+//     visibility: visible;
+//     max-height: 0;
+//   }
+
+//   to {
+//     transform: translate3d(0, 0, 0);
+//     -webkit-transform: translate3d(0, 0, 0);
+//     max-height: 238px;
+//   }
+// }
+
+// .show {
+//   animation-duration: 1s;
+//   -webkit-animation-duration: 1s;
+//   animation-fill-mode: both;
+//   -webkit-animation-fill-mode: both;
+//   animation-name: show;
+//   -webkit-animation-name: show;
+// }

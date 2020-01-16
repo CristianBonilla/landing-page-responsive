@@ -30,7 +30,9 @@ body {
 a,
 button,
 input,
-textarea {
+textarea,
+main,
+section {
   outline: none;
 
   &:hover,

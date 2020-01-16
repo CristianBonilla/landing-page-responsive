@@ -48,26 +48,28 @@
           </ul>
         </div>
       </nav>
-      <!-- Header -->
-      <header class="header">
-        <div class="header_title">
-          <h2>Landerz<b>.</b></h2>
-        </div>
-      </header>
-      <!-- Home -->
-      <main id="home" class="home">
-        <div class="home_content">
-          <div class="home_intro">
-            <h1 class="home_intro_title">Grow Your Business Faster</h1>
-            <p class="home_intro_description">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius corrupti velit soluta repellendus?
-            </p>
-            <button type="button" class="home_intro_started">Get Started</button>
+      <main id="home">
+        <!-- Header -->
+        <header class="header">
+          <div class="header_title">
+            <h2>Landerz<b>.</b></h2>
           </div>
-          <figure class="home_image">
-            <img src="assets/images/landing_1.png" alt="">
-          </figure>
-        </div>
+        </header>
+        <!-- Home -->
+        <section class="home">
+          <div class="home_content">
+            <div class="home_intro">
+              <h1 class="home_intro_title">Grow Your Business Faster</h1>
+              <p class="home_intro_description">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius corrupti velit soluta repellendus?
+              </p>
+              <button type="button" class="home_intro_started">Get Started</button>
+            </div>
+            <figure class="home_image">
+              <img src="assets/images/landing_1.png" alt="">
+            </figure>
+          </div>
+        </section>
       </main>
       <!-- Features -->
       <section id="features" class="features">
@@ -173,13 +175,7 @@
       </section>
       <!-- Prototypes -->
       <section class="prototypes">
-        <ul class="prototypes_slider">
-          <li>
-            <figure class="prototypes_image">
-              <img src="assets/images/prototypes/do_ui_kit_download_cta_floating_devices-2x.png" alt="">
-            </figure>
-          </li>
-        </ul>
+        <div class="prototypes_slider"></div>
         <div class="prototypes_content">
           <h4 class="prototypes_title">Create interactive prototypes</h4>
           <p class="prototypes_text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit ducimus ab, harum tempore laborum excepturi!</p>
@@ -218,13 +214,7 @@
       <section id="about-us" class="about-us">
         <h4 class="about-us_title">About Us</h4>
         <div class="about-us_container">
-          <ul class="about-us_slider">
-            <li>
-              <figure class="about-us_image">
-                <img src="assets/images/about/about_1.jpg" alt="">
-              </figure>
-            </li>
-          </ul>
+          <div class="about-us_slider"></div>
           <div class="about-us_content">
             <h4 class="about-us_content_title">Create interactive prototypes</h4>
             <p class="about-us_content_text">
@@ -297,5 +287,10 @@
 
     <script type="text/javascript" src="js/vendor/axios.min.js"></script>
     <script type="text/javascript" src="js/vendor/rxjs.umd.min.js"></script>
+    <script type="text/javascript" src="js/vendor/imagesloaded.min.js"></script>
+    <script type="module" src="js/main.js"></script>
+    <script nomodule>
+      alert("El navegador actual no soporta los módulos de ES6");
+    </script>
   </body>
 </html>

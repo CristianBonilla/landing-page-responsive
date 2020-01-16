@@ -32,7 +32,6 @@
     align-items: center;
     flex-grow: 1;
     flex-basis: 100%;
-    display: none;
   }
 
   &_menu {
@@ -83,6 +82,25 @@
     &:focus {
       opacity: .7;
       text-decoration: none;
+    }
+  }
+}
+
+@media (max-width: 575px) {
+  .navigation {
+
+    &_content {
+
+      &:not(.show) {
+        display: none;
+      }
+
+      &.toggle {
+        position: relative;
+        overflow: hidden;
+        height: 0;
+        transition: height .5s ease-in-out;
+      }
     }
   }
 }
