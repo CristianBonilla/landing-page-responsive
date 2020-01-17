@@ -1,10 +1,12 @@
 import Glide from './glide.esm.js';
 
 const { ...axiosObject } = axios;
+const { ...rxjsObject } = rxjs;
+const imagesFunction = imagesLoaded;
 
-export default {
-  axios: axiosObject,
-  imagesLoaded,
+export {
+  axiosObject as axios,
+  imagesFunction as imagesLoaded,
   Glide,
-  rxjs
+  rxjsObject as rxjs
 };
