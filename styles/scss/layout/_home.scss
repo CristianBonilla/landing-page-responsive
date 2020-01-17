@@ -31,7 +31,7 @@
     }
 
     &_description {
-      font-size: calc(#{ $default-font-size } - .2rem);
+      font-size: calc(#{ $default-text-size } - .2rem);
       line-height: $text-line-height;
       color: $text-color;
       margin-bottom: 1rem;

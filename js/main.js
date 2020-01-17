@@ -3,6 +3,8 @@ import { Toggle } from './navigation-toggle.js';
 import { Scrolling } from './smooth-scroll.js';
 import { prototypes, about } from './images.js';
 
+const { imagesLoaded, Glide} = libraries;
+
 const $toggler = document.getElementById('navigation_toggler');
 const $menuContent = document.querySelector('.navigation_content');
 const $menuLinks = $menuContent.querySelectorAll('ul>li>a');
@@ -12,8 +14,6 @@ const toggle = new Toggle($toggler, $menuContent, mediaQuery);
 toggle.apply();
 const scrolling = new Scrolling($menuLinks);
 scrolling.apply();
-
-const { Glide, imagesLoaded } = libraries;
 
 const sliderOptionsDefault = {
   type: 'carousel',
@@ -42,15 +42,41 @@ function sliderAutoHeight(Glide, { Html }, events) {
   return extend;
 }
 
-function applySlider(selector, items, options = { }) {
-  const itemsTemplate = items.reduce((p, c) =>
+function trackSliderTemplate(items) {
+  const slidesTemplate = items.reduce((p, c) =>
     p + `<li class="glide__slide">${ c }</li>`, '');
+  let trackTemplate = '';
+  if (slidesTemplate.length) {
+    trackTemplate = `
+      <div class="glide__track" data-glide-el="track">
+        <ul class="glide__slides">${ slidesTemplate }</ul>
+      </div>`;
+  }
 
+  return trackTemplate;
+}
+
+function bulletsSliderTemplate(amount) {
+  let buttonsTemplate = '';
+  for (let i = 0; i < amount; i++) {
+    buttonsTemplate += `<button class="glide__bullet" data-glide-dir="${ i }"></button>`;
+  }
+  let bulletsTemplate = '';
+  if (buttonsTemplate.length) {
+    bulletsTemplate = `
+      <div class="glide__bullets" data-glide-el="controls[nav]">
+        ${ buttonsTemplate }
+      </div>`;
+  }
+
+  return bulletsTemplate;
+}
+
+function applySlider(selector, templates, options = { }) {
   const sliderTemplate = `
     <div class="glide">
-      <div class="glide__track" data-glide-el="track">
-        <ul class="glide__slides">${ itemsTemplate }</ul>
-      </div>
+      ${ templates.track }
+      ${ templates.bullets }
     </div>`;
 
   const element = document.querySelector(selector);
@@ -68,16 +94,18 @@ const prototypesTemplate = prototypes.map(p => `
   <figure class="prototypes_image">
     <img src="${ p }" alt="">
   </figure>`);
-const prototypesSlider = applySlider(
-  '.prototypes .prototypes_slider',
-  prototypesTemplate);
+const prototypesSlider = applySlider('.prototypes .prototypes_slider', {
+  bullets: '',
+  track: trackSliderTemplate(prototypesTemplate)
+});
 prototypesSlider.mount({ sliderAutoHeight });
 
 const aboutTemplate = about.map(a => `
   <figure class="about-us_image">
     <img src="${ a }" alt="">
   </figure>`);
-const aboutSlider = applySlider(
-  '.about-us .about-us_slider',
-  aboutTemplate);
+const aboutSlider = applySlider('.about-us .about-us_slider', {
+  bullets: '',
+  track: trackSliderTemplate(aboutTemplate)
+});
 aboutSlider.mount({ sliderAutoHeight });

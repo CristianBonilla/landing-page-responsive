@@ -6,7 +6,7 @@
 
 @mixin landing-button {
   margin-top: 1.5rem;
-  font-size: calc(#{ $default-font-size } - .1rem);
+  font-size: calc(#{ $default-text-size } - .1rem);
   color: $white-color;
   cursor: pointer;
   padding: 12px 25px;

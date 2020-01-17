@@ -22,7 +22,7 @@
     &_title {
       padding: 1rem 1.7rem;
       margin: 0 .5rem .7rem;
-      font-size: calc(#{ $default-font-size } + .3rem);
+      font-size: calc(#{ $default-text-size } + .3rem);
       font-weight: 500;
       color: $title-color;
     }

@@ -15,7 +15,7 @@ html {
 
 body {
   font-family: $trueno-family-r, #{ $sans-serif-family };
-  font-size: $default-font-size;
+  font-size: $default-text-size;
   line-height: $default-line-height;
   background-color: $background-color;
   color: $default-text-color;
@@ -60,5 +60,17 @@ button {
 @media (min-width: 575px) {
   .wrapper {
     min-height: calc(100vh - 46px);
+  }
+}
+
+.glide {
+  cursor: grab;
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
+
+  &#{ '--dragging' } {
+    cursor: grabbing;
+    cursor: -webkit-grabbing;
+    cursor: -moz-grabbing;
   }
 }

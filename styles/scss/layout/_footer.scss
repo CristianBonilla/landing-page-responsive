@@ -11,14 +11,14 @@
   }
 
   &_text {
-    font-size: calc(#{ $default-font-size } - .2rem);
+    font-size: calc(#{ $default-text-size } - .2rem);
     color: $footer-text-color;
     margin: 0;
     opacity: 1;
     transition: opacity 600ms ease-in-out;
 
     >strong {
-      font-size: $default-font-size;
+      font-size: $default-text-size;
     }
   }
 

@@ -26,7 +26,6 @@
     flex-direction: column;
     flex-wrap: wrap;
     width: 100%;
-    list-style: none;
 
     >blockquote {
       line-height: $text-line-height;
@@ -34,7 +33,7 @@
       text-align: center;
 
       p {
-        font-size: calc(#{ $default-font-size } - .2rem);
+        font-size: calc(#{ $default-text-size } - .2rem);
         color: $text-color;
         margin-bottom: .8rem;
       }

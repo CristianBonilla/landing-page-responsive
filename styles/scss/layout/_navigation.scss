@@ -43,14 +43,21 @@
 
     &_item {
       padding: 0;
+      border-width: 0 0 1px;
+      border-style: solid;
+      border-color: $border-color;
+
+      &:last-child {
+        border-width: 0;
+      }
 
       >a {
         display: block;
         color: $link-navigation-color;
-        padding: .8rem 0;
+        padding: 1rem 0;
         text-align: center;
-        line-height: 1;
-        font-size: calc(#{ $default-font-size } - .1rem);
+        line-height: 1.2;
+        font-size: calc(#{ $default-text-size } - .1rem);
         transition: $transition-color;
       }
 
@@ -88,6 +95,7 @@
 
 @media (max-width: 575px) {
   .navigation {
+    padding: .5rem 1rem 0;
 
     &_content {
 
@@ -114,11 +122,11 @@
 
     &_title {
       padding: .3rem 0;
-      font-size: calc(#{ $default-font-size } + .2rem);
+      font-size: calc(#{ $default-text-size } + .2rem);
       display: none;
 
       >b {
-        font-size: calc(#{ $default-font-size } + .4rem);
+        font-size: calc(#{ $default-text-size } + .4rem);
       }
     }
 
@@ -133,9 +141,11 @@
 
       &_item {
         padding: .5rem 0;
+        border: 0;
 
         >a {
           padding: .5rem;
+          line-height: 1;
         }
       }
     }
