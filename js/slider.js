@@ -17,7 +17,7 @@ export class Slider {
   constructor(selector, sliderOptions = { }) {
     this._selector = selector;
     this._sliderOptions = sliderOptions;
-    this._element = document.querySelector(selector);
+    this._$element = document.querySelector(selector);
   }
 
   static sliderAutoHeight(Glide, { Html }, events) {
@@ -40,7 +40,7 @@ export class Slider {
   applySlider(items, includeBullets) {
     const slider = this.sliderTemplate(items, includeBullets).pipe(
       mergeMap(t => {
-        this._element.innerHTML = t;
+        this._$element.innerHTML = t;
 
         return this.sliderInstance();
       }),

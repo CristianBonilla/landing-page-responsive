@@ -21,7 +21,7 @@
     <div class="wrapper">
       <!-- Navigation -->
       <nav class="navigation">
-        <a href="javascript:void(0)" class="navigation_title">Landerz<b>.</b></a>
+        <a href="#home" id="navigation_title" class="navigation_title">Landerz<b>.</b></a>
         <button type="button" id="navigation_toggler" class="navigation_toggler">
           <i class="icon-navicon"></i>
         </button>
@@ -40,7 +40,7 @@
               <a href="#testimonials">Testimonials</a>
             </li>
             <li class="navigation_menu_item">
-              <a href="javascript:void(0)">Blog</a>
+              <span>Blog</span>
             </li>
             <li class="navigation_menu_item">
               <a href="#contact">Contact</a>
@@ -88,7 +88,7 @@
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod reiciendis ipsa ad?
                 </p>
               </blockquote>
-              <a class="poster_link" href="javascript:void(0)">Learn More</a>
+              <a class="poster_link" href="">Learn More</a>
             </div>
           </article>
           <article class="poster">
@@ -104,7 +104,7 @@
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod reiciendis ipsa ad?
                 </p>
               </blockquote>
-              <a class="poster_link" href="javascript:void(0)">Learn More</a>
+              <a class="poster_link" href="">Learn More</a>
             </div>
           </article>
           <article class="poster">
@@ -120,7 +120,7 @@
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod reiciendis ipsa ad?
                 </p>
               </blockquote>
-              <a class="poster_link" href="javascript:void(0)">Learn More</a>
+              <a class="poster_link" href="">Learn More</a>
             </div>
           </article>
           <article class="poster">
@@ -136,7 +136,7 @@
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod reiciendis ipsa ad?
                 </p>
               </blockquote>
-              <a class="poster_link" href="javascript:void(0)">Learn More</a>
+              <a class="poster_link" href="">Learn More</a>
             </div>
           </article>
           <article class="poster">
@@ -152,7 +152,7 @@
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod reiciendis ipsa ad?
                 </p>
               </blockquote>
-              <a class="poster_link" href="javascript:void(0)">Learn More</a>
+              <a class="poster_link" href="">Learn More</a>
             </div>
           </article>
           <article class="poster">
@@ -168,7 +168,7 @@
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod reiciendis ipsa ad?
                 </p>
               </blockquote>
-              <a class="poster_link" href="javascript:void(0)">Learn More</a>
+              <a class="poster_link" href="">Learn More</a>
             </div>
           </article>
         </div>
@@ -214,11 +214,7 @@
       <section id="about-us" class="about-us">
         <h4 class="about-us_title">About Us</h4>
         <div class="about-us_container">
-          <div class="about-us_slider">
-            <figure class="about-us_image">
-              <img src="assets/images/about/about_1.jpg" alt="">
-            </figure>
-          </div>
+          <div class="about-us_slider"></div>
           <div class="about-us_content">
             <h4 class="about-us_content_title">Create interactive prototypes</h4>
             <p class="about-us_content_text">
@@ -252,7 +248,7 @@
         <h4 class="contact_title">Get In Touch</h4>
         <div class="contact_content">
           <h5 class="contact_content_title">Contact Form</h5>
-          <form autocomplete="off" spellcheck="false" class="form">
+          <form autocomplete="off" spellcheck="false" class="form" onsubmit="event.preventDefault()">
             <div class="form_wrap">
               <div class="form_group">
                 <label for="first-name">First Name</label>

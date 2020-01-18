@@ -1,11 +1,16 @@
 export class Toggle {
   _$html = document.documentElement;
+  _$isVisible = false;
 
   constructor($toggler, $menuContent, mediaQuery) {
     this._$toggler = $toggler;
     this._$menuContent = $menuContent;
     this._$parent = this._$menuContent.parentNode;
     this._mediaQuery = mediaQuery;
+  }
+
+  get isVisible() {
+    return this._$isVisible;
   }
 
   apply() {
@@ -18,8 +23,8 @@ export class Toggle {
       } else {
         this._$toggler.removeEventListener('click', toggleListener);
         this._$html.removeEventListener('click', scopeListener);
-        this.removeClass();
         this.heightFormat(0);
+        this.removeClass();
       }
     });
 
@@ -51,16 +56,20 @@ export class Toggle {
     this._$menuContent.classList.add('show');
     const height = this._$menuContent.offsetHeight;
     this._$menuContent.classList.add('toggle');
-    setTimeout(() => this.heightFormat(height));
+    setTimeout(() => {
+      this.heightFormat(height);
+      this._$menuContent.addEventListener('transitionend', () => {
+        this._$isVisible = true;
+      }, { once: true });
+    });
   }
 
   hide() {
     this.heightFormat(0);
-    const removeClassListener = this.removeClass.bind(this);
-    this._$menuContent.addEventListener(
-      'transitionend',
-      removeClassListener,
-      { once: true });
+    this._$menuContent.addEventListener('transitionend', () => {
+      this.removeClass();
+      this._$isVisible = false;
+    }, { once: true });
   }
 
   toggle(event) {

@@ -1,30 +1,63 @@
 export class Scrolling {
-  constructor($links) {
-    this._$links = [...$links];
+  _$currentLink = null;
+
+  constructor($mainLink, [ ...$links ]) {
+    this._$mainLink = $mainLink;
+    this._$links = $links;
   }
 
-  apply() {
-    const linkListener = this.listener.bind(this);
-    this._$links.forEach(l => l.addEventListener('click', linkListener));
-    const currentLink = this._$links.find(l => l.href === location.href);
-    if (currentLink) {
-      const event = new MouseEvent('click', {
-        view: window,
-        bubbles: true,
-        cancelable: true
+  apply(callback) {
+    this._$mainLink.addEventListener('click', event => {
+      event.preventDefault();
+      this.connectMainAnchor(callback);
+    });
+    this._$links.forEach(l => {
+      l.addEventListener('click', event => {
+        event.preventDefault();
+        this.connectAnchor(event.currentTarget, callback);
       });
-      setTimeout(() => currentLink.dispatchEvent(event));
+    });
+    const link = this.findLink(location.href);
+    if (link) {
+      this.connectAnchor(link, callback);
     }
   }
 
-  listener(event, respond = null) {
-    event.preventDefault();
-    const $element = event.currentTarget;
-    if (this.isPathnameCorrect($element)) {
-      const idElement = respond ? respond.getAttribute('href') : $element.getAttribute('href');
-      const $anchorElement = document.querySelector(idElement);
-      if ($anchorElement) {
-        this.scrolling($anchorElement, idElement);
+  findLink(href) {
+    const link = this._$links.find(l => l.href === href);
+
+    return link;
+  }
+
+  cleanLinks() {
+    this._$links.filter(l => l.classList.contains('active'))
+      .forEach(l => l.classList.remove('active'));
+    this._$currentLink.classList.add('active');
+  }
+
+  connectMainAnchor(callback = null) {
+    const link = this.findLink(this._$mainLink.href);
+    if (link) {
+      this.connectAnchor(link, callback);
+    } else {
+      this.connectAnchor(this._$mainLink, callback);
+    }
+  }
+
+  connectAnchor(element, callback = null) {
+    if (this._$currentLink === element) {
+      return;
+    }
+    this._$currentLink = element;
+    if (this.isPathnameCorrect(this._$currentLink)) {
+      const idElement = this._$currentLink.getAttribute('href');
+      const $anchor = document.querySelector(idElement);
+      if ($anchor) {
+        this.scrolling($anchor, idElement);
+        this.cleanLinks();
+        if (typeof callback === 'function') {
+          callback(this._$currentLink, $anchor);
+        }
       }
     }
   }

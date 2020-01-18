@@ -51,7 +51,8 @@
         border-width: 0;
       }
 
-      >a {
+      >a,
+      >span {
         display: block;
         color: $link-navigation-color;
         padding: 1rem 0;
@@ -59,11 +60,19 @@
         line-height: 1.2;
         font-size: calc(#{ $default-text-size } - .1rem);
         transition: $transition-color;
+
+        &.active {
+          color: $cyan-active-color;
+        }
       }
 
-      &:hover>a,
-      &:focus>a {
-        color: $link-navigation-transition-color;
+      &:hover,
+      &:focus {
+
+        a:not(.active),
+        span:not(.active) {
+          color: $link-navigation-transition-color;
+        }
       }
     }
   }
@@ -143,7 +152,8 @@
         padding: .5rem 0;
         border: 0;
 
-        >a {
+        >a,
+        >span {
           padding: .5rem;
           line-height: 1;
         }
