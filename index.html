@@ -175,7 +175,7 @@
       </section>
       <!-- Prototypes -->
       <section class="prototypes">
-        <div class="prototypes_slider"></div>
+        <div class="prototypes_carousel"></div>
         <div class="prototypes_content">
           <h4 class="prototypes_title">Create interactive prototypes</h4>
           <p class="prototypes_text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit ducimus ab, harum tempore laborum excepturi!</p>
@@ -214,7 +214,7 @@
       <section id="about-us" class="about-us">
         <h4 class="about-us_title">About Us</h4>
         <div class="about-us_container">
-          <div class="about-us_slider"></div>
+          <div class="about-us_carousel"></div>
           <div class="about-us_content">
             <h4 class="about-us_content_title">Create interactive prototypes</h4>
             <p class="about-us_content_text">
@@ -227,7 +227,7 @@
       <!-- Testimonials -->
       <section id="testimonials" class="testimonials">
         <h4 class="testimonials_title">Testimonials</h4>
-        <div class="testimonials_slider">
+        <div class="testimonials_carousel">
           <div class="testimonials_item">
             <figure class="testimonials_image">
               <img src="assets/images/testimonials/person_3.jpg" alt="">
@@ -285,12 +285,13 @@
       </footer>
     </div>
 
-    <script type="text/javascript" src="js/vendor/axios.min.js"></script>
-    <script type="text/javascript" src="js/vendor/rxjs.umd.min.js"></script>
-    <script type="text/javascript" src="js/vendor/imagesloaded.min.js"></script>
+    <script type="text/javascript" src="vendor/polyfill/windowscroll.min.js"></script>
+    <script type="text/javascript" src="vendor/axios.min.js"></script>
+    <script type="text/javascript" src="vendor/rxjs.umd.min.js"></script>
+    <script type="text/javascript" src="vendor/imagesloaded.min.js"></script>
     <script type="module" src="js/main.js"></script>
     <script nomodule>
-      alert("El navegador actual no soporta los módulos de ES6");
+      alert("El navegador actual no soporta los módulos de ES2015");
     </script>
   </body>
 </html>

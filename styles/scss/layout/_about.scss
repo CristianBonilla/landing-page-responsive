@@ -20,13 +20,13 @@
     width: 100%;
   }
 
-  &_slider,
+  &_carousel,
   &_content {
     position: relative;
     width: 100%;
   }
 
-  &_slider {
+  &_carousel {
     margin-bottom: .5rem;
   }
 
@@ -73,7 +73,7 @@
 @media (min-width: 576px) {
   .about-us {
 
-    &_slider,
+    &_carousel,
     &_content {
       flex: 0 0 50%;
       max-width: 50%;
@@ -87,7 +87,7 @@
 @media (min-width: 768px) {
   .about-us {
 
-    &_slider {
+    &_carousel {
       padding-left: 3rem;
       padding-right: 3rem;
     }

@@ -1,26 +1,36 @@
-import { imagesLoaded, Glide, rxjs } from './vendor/index.js';
+import { imagesLoaded, Glide, rxjs } from '../vendor/vendor.js';
 
 const { empty, from, iif, of, range } = rxjs;
 const { concatMapTo, defaultIfEmpty, mergeMap, reduce } = rxjs.operators;
 
-export class Slider {
-  _sliderOptionsDefault = {
-    type: 'carousel',
-    autoplay: 5000,
-    hoverpause: false,
-    gap: 0,
-    perView: 1,
-    rewindDuration: 1000,
-    animationDuration: 1000
-  };
+export class Carousel {
+  // Experimental class-fields
+  // _carouselOptionsDefault = {
+  //   type: 'carousel',
+  //   autoplay: 5000,
+  //   hoverpause: false,
+  //   gap: 0,
+  //   perView: 1,
+  //   rewindDuration: 1000,
+  //   animationDuration: 1000
+  // };
 
-  constructor(selector, sliderOptions = { }) {
+  constructor(selector, carouselOptions = { }) {
     this._selector = selector;
-    this._sliderOptions = sliderOptions;
-    this._$element = document.querySelector(selector);
+    this._carouselOptions = carouselOptions;
+    this._$element = document.querySelector(this._selector);
+    this._carouselOptionsDefault = {
+      type: 'carousel',
+      autoplay: 5000,
+      hoverpause: false,
+      gap: 0,
+      perView: 1,
+      rewindDuration: 1000,
+      animationDuration: 1000
+    };
   }
 
-  static sliderAutoHeight(Glide, { Html }, events) {
+  static carouselAutoHeight(Glide, { Html }, events) {
     const extend = {
       mount() {
         Html.track.style.transition = 'height .2s ease-in-out';
@@ -37,39 +47,39 @@ export class Slider {
     return extend;
   }
 
-  applySlider(items, includeBullets) {
-    const slider = this.sliderTemplate(items, includeBullets).pipe(
+  applyCarousel(items, includeBullets) {
+    const carousel = this._carouselTemplate(items, includeBullets).pipe(
       mergeMap(t => {
         this._$element.innerHTML = t;
 
-        return this.sliderInstance();
+        return this._carouselInstance();
       }),
       defaultIfEmpty(null));
 
-    return slider;
+    return carousel;
   }
 
-  sliderInstance() {
+  _carouselInstance() {
     const instance = new Glide(`${ this._selector }>.glide`, {
-      ...this._sliderOptionsDefault,
-      ...this._sliderOptions
+      ...this._carouselOptionsDefault,
+      ...this._carouselOptions
     });
 
     return of(instance);
   }
 
-  sliderTemplate(items, includeBullets) {
+  _carouselTemplate(items, includeBullets) {
     const bullets = includeBullets ? items.length : 0;
-    const template = this.trackSliderTemplate(items).pipe(
+    const template = this._trackCarouselTemplate(items).pipe(
       concatMapTo(
-        this.bulletsSliderTemplate(bullets), (t, b) => t + b),
+        this._bulletsCarouselTemplate(bullets), (t, b) => t + b),
       mergeMap(t =>
         iif(() => !t.length, empty(), of(`<div class="glide">${ t }</div>`))));
 
     return template;
   }
 
-  trackSliderTemplate(items) {
+  _trackCarouselTemplate(items) {
     const trackTemplate = from(items).pipe(
       reduce((a, c) =>
         a + `<li class="glide__slide">${ c }</li>`, ''),
@@ -82,7 +92,7 @@ export class Slider {
     return trackTemplate;
   }
 
-  bulletsSliderTemplate(amount) {
+  _bulletsCarouselTemplate(amount) {
     const bulletTemplate = range(0, amount).pipe(
       reduce((a, c) =>
         a + `<button class="glide__bullet" data-glide-dir="${ c }"></button>`, ''),

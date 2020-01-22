@@ -1,38 +1,28 @@
 export class Scrolling {
-  _$currentLink = null;
+  // Experimental class-fields
+  // _$currentLink = null;
 
-  constructor($mainLink, [ ...$links ]) {
+  constructor($mainLink, ...$links) {
     this._$mainLink = $mainLink;
     this._$links = $links;
+    this._$currentLink = null;
   }
 
   apply(callback) {
-    this._$mainLink.addEventListener('click', event => {
-      event.preventDefault();
+    this._$mainLink.addEventListener('click', e => {
+      e.preventDefault();
       this.connectMainAnchor(callback);
     });
     this._$links.forEach(l => {
-      l.addEventListener('click', event => {
-        event.preventDefault();
-        this.connectAnchor(event.currentTarget, callback);
+      l.addEventListener('click', e => {
+        e.preventDefault();
+        this.connectAnchor(e.currentTarget, callback);
       });
     });
-    const link = this.findLink(location.href);
-    if (link) {
-      this.connectAnchor(link, callback);
+    const $link = this.findLink(location.href);
+    if ($link) {
+      this.connectAnchor($link, callback);
     }
-  }
-
-  findLink(href) {
-    const link = this._$links.find(l => l.href === href);
-
-    return link;
-  }
-
-  cleanLinks() {
-    this._$links.filter(l => l.classList.contains('active'))
-      .forEach(l => l.classList.remove('active'));
-    this._$currentLink.classList.add('active');
   }
 
   connectMainAnchor(callback = null) {
@@ -49,12 +39,12 @@ export class Scrolling {
       return;
     }
     this._$currentLink = element;
-    if (this.isPathnameCorrect(this._$currentLink)) {
+    if (this._isPathnameCorrect(this._$currentLink)) {
       const idElement = this._$currentLink.getAttribute('href');
       const $anchor = document.querySelector(idElement);
       if ($anchor) {
-        this.scrolling($anchor, idElement);
-        this.cleanLinks();
+        this._scrolling($anchor, idElement);
+        this.resetLinksActive();
         if (typeof callback === 'function') {
           callback(this._$currentLink, $anchor);
         }
@@ -62,38 +52,50 @@ export class Scrolling {
     }
   }
 
-  scrolling($anchorElement, id) {
-    const originalTop = this.distanceToTop($anchorElement);
+  findLink(href) {
+    const link = this._$links.find(l => l.href === href);
+
+    return link;
+  }
+
+  resetLinksActive() {
+    this._$links.filter(l => l.classList.contains('active'))
+      .forEach(l => l.classList.remove('active'));
+    this._$currentLink.classList.add('active');
+  }
+
+  _scrolling($anchorElement, id) {
+    const originalTop = this._distanceToTop($anchorElement);
     window.scrollBy({
       top: originalTop,
       left: 0,
       behavior: 'smooth'
     });
     const checkIfDone = setInterval(() => {
-      if (this.distanceToTop($anchorElement) === 0 || this.atBottom()) {
-        this.history($anchorElement, id);
+      if (this._distanceToTop($anchorElement) === 0 || this._atBottom()) {
+        this._history($anchorElement, id);
         clearInterval(checkIfDone);
       }
     }, 100);
   }
 
-  history($anchorElement, id) {
-    $anchorElement.tabIndex = '-1';
+  _history($anchorElement, id) {
+    // $anchorElement.tabIndex = '-1';
     $anchorElement.focus();
     window.history.pushState('', '', id);
   }
 
-  distanceToTop($element) {
+  _distanceToTop($element) {
     const { top } = $element.getBoundingClientRect();
 
     return Math.floor(top);
   }
 
-  atBottom() {
+  _atBottom() {
     return window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 2;
   }
 
-  isPathnameCorrect($element) {
+  _isPathnameCorrect($element) {
     const hasHref = $element.href && $element.href.indexOf('#') >= 0;
     const pathname = location.pathname;
     const equalPathname = $element.pathname === pathname || ('/' + $element.pathname) === pathname;

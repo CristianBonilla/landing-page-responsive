@@ -12,7 +12,7 @@
     margin-bottom: 2rem;
   }
 
-  &_slider {
+  &_carousel {
     position: relative;
     width: 100%;
     margin: 0 auto;
@@ -66,7 +66,7 @@
 }
 
 @media (min-width: 576px) {
-  .testimonials_slider {
+  .testimonials_carousel {
     width: 85%;
   }
 }
@@ -74,7 +74,7 @@
 @media (min-width: 768px) {
   .testimonials {
 
-    &_slider {
+    &_carousel {
       padding-left: 3rem;
       padding-right: 3rem;
     }

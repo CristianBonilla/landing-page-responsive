@@ -8,7 +8,7 @@
   justify-content: space-between;
   align-items: center;
 
-  &_slider,
+  &_carousel,
   &_content {
     position: relative;
     width: 100%;
@@ -72,12 +72,12 @@
   .prototypes {
     min-height: calc(100vh - 46px);
 
-    &_slider,
+    &_carousel,
     &_content {
       padding: 0 15px;
     }
 
-    &_slider {
+    &_carousel {
       flex: 0 0 55%;
       max-width: 55%;
     }
