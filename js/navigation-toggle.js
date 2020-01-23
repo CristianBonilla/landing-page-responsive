@@ -16,7 +16,7 @@ export class Toggle {
     return this._$isVisible;
   }
 
-  apply() {
+  mount() {
     const toggleListener = this.toggle.bind(this);
     const scopeListener = this._toggleScope.bind(this);
     // this._mediaQuery.addEventListener('change', ({ matches }) => {

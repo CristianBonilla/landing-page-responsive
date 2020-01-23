@@ -11,9 +11,9 @@ const $links = $menuContent.querySelectorAll('ul>li>a');
 const mediaQuery = window.matchMedia('(max-width: 575px)');
 
 const toggle = new Toggle($toggler, $menuContent, mediaQuery);
-toggle.apply();
+toggle.mount();
 const scrolling = new Scrolling($mainLink, ...$links);
-scrolling.apply(() => {
+scrolling.mount(() => {
   if (toggle.isVisible) {
     toggle.hide();
   }

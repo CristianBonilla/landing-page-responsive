@@ -4,89 +4,106 @@ export class Scrolling {
 
   constructor($mainLink, ...$links) {
     this._$mainLink = $mainLink;
-    this._$links = $links;
     this._$currentLink = null;
+    this.anchors = $links.map(l => this._anchorObject(l));
   }
 
-  apply(callback) {
+  mount(activeHandler = null) {
     this._$mainLink.addEventListener('click', e => {
       e.preventDefault();
-      this.connectMainAnchor(callback);
-    });
-    this._$links.forEach(l => {
-      l.addEventListener('click', e => {
-        e.preventDefault();
-        this.connectAnchor(e.currentTarget, callback);
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
       });
     });
-    const $link = this.findLink(location.href);
-    if ($link) {
-      this.connectAnchor($link, callback);
+    for (const anchor of this.anchors) {
+      anchor.$link.addEventListener('click', e => {
+        e.preventDefault();
+        this._updateAnchorTopDistance(anchor.$link);
+        this.anchorScrolling(anchor, activeHandler);
+      });
+    }
+    const anchor = this.findAnchorByHref(location.href);
+    if (anchor) {
+      this.anchorScrolling(anchor, activeHandler);
     }
   }
 
-  connectMainAnchor(callback = null) {
-    const link = this.findLink(this._$mainLink.href);
-    if (link) {
-      this.connectAnchor(link, callback);
-    } else {
-      this.connectAnchor(this._$mainLink, callback);
-    }
+  findAnchorByHref(href) {
+    const anchor = this.anchors.find(a => a.$link.href === href);
+
+    return anchor;
   }
 
-  connectAnchor(element, callback = null) {
-    if (this._$currentLink === element) {
-      return;
-    }
-    this._$currentLink = element;
-    if (this._isPathnameCorrect(this._$currentLink)) {
-      const idElement = this._$currentLink.getAttribute('href');
-      const $anchor = document.querySelector(idElement);
-      if ($anchor) {
-        this._scrolling($anchor, idElement);
-        this.resetLinksActive();
-        if (typeof callback === 'function') {
-          callback(this._$currentLink, $anchor);
-        }
+  resetLinksActive() {
+    for (const { $link } of this.anchors) {
+      if ($link !== this._$currentLink) {
+        $link.classList.remove('active');
+      } else {
+        $link.classList.add('active');
       }
     }
   }
 
-  findLink(href) {
-    const link = this._$links.find(l => l.href === href);
-
-    return link;
+  anchorScrolling({ id, $anchor, $link, topDistance }, activeHandler) {
+    if (!this._isPathnameCorrect($link) || this._$currentLink === $link) {
+      return;
+    }
+    if ($anchor) {
+      this._$currentLink = $link;
+      this.resetLinksActive();
+      this._scrolling(id, $anchor, topDistance);
+      if (typeof activeHandler === 'function') {
+        activeHandler(this._$currentLink, $anchor);
+      }
+    }
   }
 
-  resetLinksActive() {
-    this._$links.filter(l => l.classList.contains('active'))
-      .forEach(l => l.classList.remove('active'));
-    this._$currentLink.classList.add('active');
+  _updateAnchorTopDistance($link) {
+    const anchorObject = this.anchors.find(a => a.$link === $link);
+    if (anchorObject) {
+      anchorObject.topDistance = this._topDistance(anchorObject.$anchor);
+    }
   }
 
-  _scrolling($anchorElement, id) {
-    const originalTop = this._distanceToTop($anchorElement);
+  _anchorObject($link) {
+    const id = $link.getAttribute('href');
+    const $anchor = document.querySelector(id);
+    const topDistance = $anchor ? this._topDistance($anchor) : 0;
+
+    return {
+      id,
+      $anchor,
+      $link,
+      topDistance
+    };
+  }
+
+  _scrolling(id, $anchor, topDistance) {
     window.scrollBy({
-      top: originalTop,
+      top: topDistance,
       left: 0,
       behavior: 'smooth'
     });
     const checkIfDone = setInterval(() => {
-      if (this._distanceToTop($anchorElement) === 0 || this._atBottom()) {
-        this._history($anchorElement, id);
+      if (this._topDistance($anchor) === 0 || this._atBottom()) {
+        this._history(id, $anchor);
         clearInterval(checkIfDone);
       }
     }, 100);
   }
 
-  _history($anchorElement, id) {
-    // $anchorElement.tabIndex = '-1';
-    $anchorElement.focus();
+  _history(id, $anchor) {
+    this.anchors.filter(a => a.$anchor.hasAttribute('tabindex'))
+      .forEach(a => a.$anchor.removeAttribute('tabindex'));
+    $anchor.tabIndex = '-1';
+    $anchor.focus();
     window.history.pushState('', '', id);
   }
 
-  _distanceToTop($element) {
-    const { top } = $element.getBoundingClientRect();
+  _topDistance($anchor) {
+    const { top } = $anchor.getBoundingClientRect();
 
     return Math.floor(top);
   }
@@ -95,11 +112,11 @@ export class Scrolling {
     return window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 2;
   }
 
-  _isPathnameCorrect($element) {
-    const hasHref = $element.href && $element.href.indexOf('#') >= 0;
+  _isPathnameCorrect($link) {
+    const hasHref = $link.href && $link.href.indexOf('#') >= 0;
     const pathname = location.pathname;
-    const equalPathname = $element.pathname === pathname || ('/' + $element.pathname) === pathname;
-    const equalSearch = $element.search === location.search;
+    const equalPathname = $link.pathname === pathname || ('/' + $link.pathname) === pathname;
+    const equalSearch = $link.search === location.search;
 
     return hasHref && equalPathname && equalSearch;
   }
