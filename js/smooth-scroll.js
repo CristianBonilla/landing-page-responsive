@@ -5,7 +5,7 @@ export class Scrolling {
   constructor($mainLink, ...$links) {
     this._$mainLink = $mainLink;
     this._$currentLink = null;
-    this.anchors = $links.map(l => this._anchorObject(l));
+    this._anchors = $links.map($l => this._anchor($l));
   }
 
   mount(activeHandler = null) {
@@ -17,27 +17,27 @@ export class Scrolling {
         behavior: 'smooth'
       });
     });
-    for (const anchor of this.anchors) {
+    for (const anchor of this._anchors) {
       anchor.$link.addEventListener('click', e => {
         e.preventDefault();
-        this._updateAnchorTopDistance(anchor.$link);
         this.anchorScrolling(anchor, activeHandler);
       });
     }
-    const anchor = this.findAnchorByHref(location.href);
+    const anchor = this.anchorByHref(location.href);
     if (anchor) {
       this.anchorScrolling(anchor, activeHandler);
     }
-  }
-
-  findAnchorByHref(href) {
-    const anchor = this.anchors.find(a => a.$link.href === href);
-
-    return anchor;
+    window.addEventListener('scroll', () => {
+      const fromTop = window.scrollY;
+      const anchor = this.anchorScrollingPosition(fromTop);
+      if (anchor && anchor.$link !== this._$currentLink) {
+        this.anchorActive(anchor, false);
+      }
+    });
   }
 
   resetLinksActive() {
-    for (const { $link } of this.anchors) {
+    for (const { $link } of this._anchors) {
       if ($link !== this._$currentLink) {
         $link.classList.remove('active');
       } else {
@@ -46,48 +46,63 @@ export class Scrolling {
     }
   }
 
-  anchorScrolling({ id, $anchor, $link, topDistance }, activeHandler) {
+  anchorScrollingPosition(fromTop) {
+    const anchor = this._anchors.find(({ $anchor }) =>
+      $anchor.offsetTop <= fromTop && $anchor.offsetTop + $anchor.offsetHeight > fromTop);
+
+    return anchor;
+  }
+
+  anchorScrolling(anchor, activeHandler) {
+    const { $link, $anchor } = anchor;
     if (!this._isPathnameCorrect($link) || this._$currentLink === $link) {
       return;
     }
     if ($anchor) {
-      this._$currentLink = $link;
-      this.resetLinksActive();
-      this._scrolling(id, $anchor, topDistance);
+      this.anchorActive(anchor);
       if (typeof activeHandler === 'function') {
-        activeHandler(this._$currentLink, $anchor);
+        activeHandler($link, $anchor);
       }
     }
   }
 
-  _updateAnchorTopDistance($link) {
-    const anchorObject = this.anchors.find(a => a.$link === $link);
-    if (anchorObject) {
-      anchorObject.topDistance = this._topDistance(anchorObject.$anchor);
+  anchorActive({ id, $link, $anchor }, smooth = true) {
+    this._$currentLink = $link;
+    this.resetLinksActive();
+    if (smooth) {
+      this._scrolling(id, $anchor);
+    } else {
+      this._history(id, $anchor);
     }
   }
 
-  _anchorObject($link) {
+  anchorByHref(href) {
+    const anchor = this._anchors.find(({ $link }) => $link.href === href);
+
+    return anchor;
+  }
+
+  _anchor($link) {
     const id = $link.getAttribute('href');
     const $anchor = document.querySelector(id);
-    const topDistance = $anchor ? this._topDistance($anchor) : 0;
 
     return {
       id,
       $anchor,
-      $link,
-      topDistance
+      $link
     };
   }
 
-  _scrolling(id, $anchor, topDistance) {
+  _scrolling(id, $anchor) {
+    const top = this._distanceTop($anchor);
     window.scrollBy({
-      top: topDistance,
+      top,
       left: 0,
       behavior: 'smooth'
     });
     const checkIfDone = setInterval(() => {
-      if (this._topDistance($anchor) === 0 || this._atBottom()) {
+      const topChange = this._distanceTop($anchor);
+      if (topChange <= 0 || this._atBottom()) {
         this._history(id, $anchor);
         clearInterval(checkIfDone);
       }
@@ -95,17 +110,14 @@ export class Scrolling {
   }
 
   _history(id, $anchor) {
-    this.anchors.filter(a => a.$anchor.hasAttribute('tabindex'))
-      .forEach(a => a.$anchor.removeAttribute('tabindex'));
-    $anchor.tabIndex = '-1';
     $anchor.focus();
     window.history.pushState('', '', id);
   }
 
-  _topDistance($anchor) {
+  _distanceTop($anchor) {
     const { top } = $anchor.getBoundingClientRect();
 
-    return Math.floor(top);
+    return top;
   }
 
   _atBottom() {
