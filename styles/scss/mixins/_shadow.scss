@@ -1,0 +1,29 @@
+@mixin cyan-shadow {
+  box-shadow: 0px 0px 10px 0px $cyan-shadow-color;
+  -webkit-box-shadow: 0px 0px 10px 0px $cyan-shadow-color;
+  -moz-box-shadow: 0px 0px 10px 0px $cyan-shadow-color;
+}
+
+@mixin navigation-shadow {
+  box-shadow: 0 .125rem .25rem $navigation-shadow-color;
+  -webkit-box-shadow: 0 .125rem .25rem $navigation-shadow-color;
+  -moz-box-shadow: 0 .125rem .25rem $navigation-shadow-color;
+}
+
+@mixin toggle-shadow {
+  box-shadow: 0px 6px 6px 0px $toggle-shadow-color;
+  -webkit-box-shadow: 0px 6px 6px 0px $toggle-shadow-color;
+  -moz-box-shadow: 0px 6px 6px 0px $toggle-shadow-color;
+}
+
+@mixin card-shadow {
+  box-shadow: 0 .3rem .5rem $card-border-color;
+  -webkit-box-shadow: 0 .3rem .5rem $card-border-color;
+  -moz-box-shadow: 0 .3rem .5rem $card-border-color;
+}
+
+@mixin image-shadow {
+  box-shadow: 0px 6px 25px -10px $image-shadow-color;
+  -webkit-box-shadow: 0px 6px 25px -10px $image-shadow-color;
+  -moz-box-shadow: 0px 6px 25px -10px $image-shadow-color;
+}

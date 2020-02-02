@@ -87,7 +87,7 @@
     color: #474747;
     font-size: 1.7rem;
     cursor: pointer;
-    padding: 0 1rem;
+    padding: 0 .8rem 0 1.2rem;
   }
 
   &_title,
@@ -116,6 +116,8 @@
         position: relative;
         overflow: hidden;
         height: 0;
+        margin: auto -1rem;
+        @include toggle-shadow;
         transition: height .5s ease-in-out;
       }
     }
@@ -127,7 +129,7 @@
     justify-content: flex-start;
     flex-flow: row nowrap;
     padding: 0 1rem;
-    box-shadow: $navigation-shadow;
+    @include navigation-shadow;
 
     &_title {
       padding: .3rem 0;

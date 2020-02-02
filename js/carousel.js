@@ -30,7 +30,7 @@ export class Carousel {
     };
   }
 
-  static carouselAutoHeight(Glide, { Html }, events) {
+  static setAutoHeight(Glide, { Html }, events) {
     const extend = {
       mount() {
         Html.track.style.transition = 'height .2s ease-in-out';
@@ -47,7 +47,7 @@ export class Carousel {
     return extend;
   }
 
-  applyCarousel(items, includeBullets) {
+  mount(items, includeBullets) {
     const carousel = this._carouselTemplate(items, includeBullets).pipe(
       mergeMap(t => {
         this._$element.innerHTML = t;

@@ -2,38 +2,53 @@ export class Scrolling {
   // Experimental class-fields
   // _$currentLink = null;
 
-  constructor($mainLink, ...$links) {
+  constructor($mainLink, [ ...$links ], navbarHeight = 0) {
     this._$mainLink = $mainLink;
-    this._$currentLink = null;
     this._anchors = $links.map($l => this._anchor($l));
+    this._$currentLink = null;
+    this._scrollListener = () =>
+      this.anchorCurrentPosition(false);
+    this._navbarHeight = navbarHeight;
+    this._handler = null;
   }
 
-  mount(activeHandler = null) {
+  get navbarHeight() {
+    return this._navbarHeight;
+  }
+
+  set navbarHeight(navHeight) {
+    this._navbarHeight = navHeight;
+  }
+
+  set handler(handler) {
+    this._handler = handler;
+  }
+
+  mount() {
     this._$mainLink.addEventListener('click', e => {
       e.preventDefault();
       window.scrollTo({
-        top: 0,
+        behavior: 'smooth',
         left: 0,
-        behavior: 'smooth'
+        top: 0
       });
     });
+
     for (const anchor of this._anchors) {
       anchor.$link.addEventListener('click', e => {
         e.preventDefault();
-        this.anchorScrolling(anchor, activeHandler);
+        this.anchorScrolling(anchor);
       });
     }
+
     const anchor = this.anchorByHref(location.href);
     if (anchor) {
-      this.anchorScrolling(anchor, activeHandler);
+      this.anchorScrolling(anchor);
+    } else {
+      this.anchorCurrentPosition();
     }
-    window.addEventListener('scroll', () => {
-      const fromTop = window.scrollY;
-      const anchor = this.anchorScrollingPosition(fromTop);
-      if (anchor && anchor.$link !== this._$currentLink) {
-        this.anchorActive(anchor, false);
-      }
-    });
+
+    window.addEventListener('scroll', this._scrollListener);
   }
 
   resetLinksActive() {
@@ -46,22 +61,33 @@ export class Scrolling {
     }
   }
 
-  anchorScrollingPosition(fromTop) {
-    const anchor = this._anchors.find(({ $anchor }) =>
-      $anchor.offsetTop <= fromTop && $anchor.offsetTop + $anchor.offsetHeight > fromTop);
+  anchorCurrentPosition(smooth = true) {
+    const anchor = this.anchorScrollingPosition();
+    if (anchor && anchor.$link !== this._$currentLink) {
+      this.anchorActive(anchor, smooth);
+    }
+  }
+
+  anchorScrollingPosition() {
+    const anchor = this._anchors.find(({ $anchor }) => {
+      const { top, bottom } = this._distance($anchor);
+
+      return top <= 0 && bottom > 0;
+    });
 
     return anchor;
   }
 
-  anchorScrolling(anchor, activeHandler) {
+  anchorScrolling(anchor) {
     const { $link, $anchor } = anchor;
     if (!this._isPathnameCorrect($link) || this._$currentLink === $link) {
       return;
     }
     if ($anchor) {
+      window.removeEventListener('scroll', this._scrollListener);
       this.anchorActive(anchor);
-      if (typeof activeHandler === 'function') {
-        activeHandler($link, $anchor);
+      if (typeof this._handler === 'function') {
+        this._handler($link, $anchor);
       }
     }
   }
@@ -86,24 +112,21 @@ export class Scrolling {
     const id = $link.getAttribute('href');
     const $anchor = document.querySelector(id);
 
-    return {
-      id,
-      $anchor,
-      $link
-    };
+    return { id, $anchor, $link };
   }
 
   _scrolling(id, $anchor) {
-    const top = this._distanceTop($anchor);
+    const { top } = this._distance($anchor);
     window.scrollBy({
-      top,
+      behavior: 'smooth',
       left: 0,
-      behavior: 'smooth'
+      top
     });
     const checkIfDone = setInterval(() => {
-      const topChange = this._distanceTop($anchor);
-      if (topChange <= 0 || this._atBottom()) {
+      const { top } = this._distance($anchor);
+      if (top === 0 || this._atBottom()) {
         this._history(id, $anchor);
+        window.addEventListener('scroll', this._scrollListener);
         clearInterval(checkIfDone);
       }
     }, 100);
@@ -111,13 +134,22 @@ export class Scrolling {
 
   _history(id, $anchor) {
     $anchor.focus();
-    window.history.pushState('', '', id);
+    // window.history.pushState('', '', id);
   }
 
-  _distanceTop($anchor) {
-    const { top } = $anchor.getBoundingClientRect();
+  _distance($anchor) {
+    let { top, bottom } = $anchor.getBoundingClientRect();
+    if (top !== 0) {
+      top -= this._navbarHeight;
+    }
+    if (bottom !== 0) {
+      bottom -= this._navbarHeight;
+    }
 
-    return top;
+    return {
+      top: Math.floor(top),
+      bottom: Math.floor(bottom)
+    };
   }
 
   _atBottom() {
