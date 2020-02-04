@@ -1,4 +1,4 @@
-import { imagesLoaded, Glide, rxjs } from '../vendor/vendor.js';
+import Glide from '../vendor/glide.esm.js';
 
 const { empty, from, iif, of, range } = rxjs;
 const { concatMapTo, defaultIfEmpty, mergeMap, reduce } = rxjs.operators;
@@ -33,7 +33,7 @@ export class Carousel {
   static setAutoHeight(Glide, { Html }, events) {
     const extend = {
       mount() {
-        Html.track.style.transition = 'height .2s ease-in-out';
+        Html.track.classList.add('auto-height');
         imagesLoaded(Html.track, this.set);
       },
       set() {

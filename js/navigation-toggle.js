@@ -18,10 +18,6 @@ export class Toggle {
     return this._$isVisible;
   }
 
-  get navbarHeight() {
-    return this._navbarHeight();
-  }
-
   set handler(handler) {
     this._handler = handler;
   }
@@ -48,24 +44,20 @@ export class Toggle {
     this._$menuContent.classList.add('show');
     const menuHeight = this._$menuContent.offsetHeight;
     this._$menuContent.classList.add('toggle');
-    this._$menuContent.addEventListener('transitionend', () => {
-      this._$isVisible = true;
-      if (typeof this._handler === 'function') {
-        this._handler();
-      }
-    }, { once: true });
+    this._transitionEnd(true);
     setTimeout(() => this._heightFormat(menuHeight), 10);
   }
 
   hide() {
-    this._$menuContent.addEventListener('transitionend', () => {
-      this._removeClass();
-      this._$isVisible = false;
-      if (typeof this._handler === 'function') {
-        this._handler();
-      }
-    }, { once: true });
+    this._transitionEnd(false);
     this._heightFormat(0);
+  }
+
+  navbarHeight() {
+    const navHeight = this._$nav.offsetHeight;
+    const menuHeight = this._$menuContent.offsetHeight;
+
+    return navHeight > menuHeight ? navHeight - menuHeight : navHeight;
   }
 
   _toggle(event) {
@@ -99,11 +91,16 @@ export class Toggle {
     }
   }
 
-  _navbarHeight() {
-    const navHeight = this._$nav.offsetHeight;
-    const menuHeight = this._$menuContent.offsetHeight;
-
-    return navHeight > menuHeight ? navHeight - menuHeight : navHeight;
+  _transitionEnd(isVisible) {
+    this._$menuContent.addEventListener('transitionend', () => {
+      if (!isVisible) {
+        this._removeClass();
+      }
+      this._$isVisible = isVisible;
+      if (typeof this._handler === 'function') {
+        this._handler();
+      }
+    }, { once: true });
   }
 
   _hasClassMenu(...classes) {

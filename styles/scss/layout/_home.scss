@@ -1,18 +1,17 @@
 .home {
   min-height: 100vh;
-  background-color: $white-color;
+  padding: 52px 0 20px;
   width: 100%;
-  display: flex;
-  align-items: center;
-  padding: 60px 0 20px;
+  background-color: $white-color;
 
   &_content {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
     flex-direction: column;
     width: 100%;
+    min-height: calc(100vh - 72px);
   }
 
   &_intro {
@@ -47,7 +46,7 @@
     padding: 0 1rem;
     width: 100%;
     overflow: hidden;
-    margin: 0 0 1rem;
+    margin: 1rem 0 0;
     order: 0;
 
     >img {
@@ -63,11 +62,12 @@
 
 @media (min-width: 576px) {
   .home {
-    min-height: calc(100vh - 94px);
-    padding: 0;
+    padding: 46px 0 20px;
 
     &_content {
+      justify-content: space-between;
       flex-direction: row;
+      min-height: calc(100vh - 114px);
     }
 
     &_intro {

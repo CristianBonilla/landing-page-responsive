@@ -1,38 +1,104 @@
-// @-webkit-keyframes show {
-//   from {
-//     transform: translate3d(0, -100%, 0);
-//     -webkit-transform: translate3d(0, -100%, 0);
-//     visibility: visible;
-//     max-height: 0;
-//   }
+@keyframes slide {
+  from {
+    transform: translate3d(-100%, 0, 0);
+    visibility: visible;
+  }
 
-//   to {
-//     transform: translate3d(0, 0, 0);
-//     -webkit-transform: translate3d(0, 0, 0);
-//     max-height: 238px;
-//   }
-// }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
 
-// @keyframes show {
-//   from {
-//     transform: translate3d(0, -100%, 0);
-//     -webkit-transform: translate3d(0, -100%, 0);
-//     visibility: visible;
-//     max-height: 0;
-//   }
+@keyframes rubber {
+  from {
+    transform: scale3d(1, 1, 1);
+  }
 
-//   to {
-//     transform: translate3d(0, 0, 0);
-//     -webkit-transform: translate3d(0, 0, 0);
-//     max-height: 238px;
-//   }
-// }
+  30% {
+    transform: scale3d(1.25, .75, 1);
+  }
 
-// .show {
-//   animation-duration: 1s;
-//   -webkit-animation-duration: 1s;
-//   animation-fill-mode: both;
-//   -webkit-animation-fill-mode: both;
-//   animation-name: show;
-//   -webkit-animation-name: show;
-// }
+  40% {
+    transform: scale3d(.75, 1.25, 1);
+  }
+
+  50% {
+    transform: scale3d(1.15, .85, 1);
+  }
+
+  65% {
+    transform: scale3d(.95, 1.05, 1);
+  }
+
+  75% {
+    transform: scale3d(1.05, .95, 1);
+  }
+
+  to {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes outBox {
+  from {
+    opacity: 0;
+    transform: scale(.1) rotate(30deg);
+    transform-origin: center bottom;
+  }
+
+  50% {
+    transform: rotate(-10deg);
+  }
+
+  70% {
+    transform: rotate(3deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes zoom {
+  from {
+    opacity: 0;
+    transform: scale3d(.3, .3, .3);
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate {
+
+  &_slide {
+    @include animation {
+      animation-name: slide;
+      animation-duration: 1s;
+      animation-delay: 0s;
+    }
+  }
+
+  &_rubber {
+    @include animation {
+      animation-name: rubber;
+      animation-duration: 1.5s;
+    }
+  }
+
+  &_outBox {
+    @include animation {
+      animation-name: outBox;
+      animation-duration: 2.5s;
+    }
+  }
+
+  &_zoom {
+    @include animation {
+      animation-name: zoom;
+      animation-duration: 1s;
+    }
+  }
+}

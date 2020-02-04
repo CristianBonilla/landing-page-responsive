@@ -5,11 +5,17 @@
   padding: 3rem 0;
 
   &_title {
-    font-family: $trueno-family-eb;
-    font-size: $title-size-l;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 0 0 3rem;
-    line-height: 1.2;
+
+    >h4 {
+      font-family: $trueno-family-eb;
+      font-size: $title-size-l;
+      line-height: 1.2;
+      margin: 0;
+    }
   }
 
   &_content {
@@ -91,13 +97,9 @@
 }
 
 @media (min-width: 576px) {
-  .features {
-    min-height: calc(100vh - 46px);
-
-    .poster {
-      width: calc((100% - 2rem) / 2);
-      margin: 0 .5rem 1rem;
-    }
+  .features .poster {
+    width: calc((100% - 2rem) / 2);
+    margin: 0 .5rem 1rem;
   }
 }
 

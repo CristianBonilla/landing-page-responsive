@@ -1,0 +1,15 @@
+@mixin animation {
+  animation-fill-mode: both;
+  animation-delay: 500ms;
+  @content;
+
+  &.loop {
+    animation-iteration-count: infinite;
+  }
+
+  @media (print), (prefers-reduced-motion: reduce) {
+    animation-duration: 1ms !important;
+    transition-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

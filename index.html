@@ -21,7 +21,7 @@
     <div class="wrapper">
       <!-- Navigation -->
       <nav class="navigation">
-        <a href="#home" id="navigation_title" class="navigation_title">Landerz<b>.</b></a>
+        <a href="" id="navigation_title" class="navigation_title">Landerz<b>.</b></a>
         <button type="button" id="navigation_toggler" class="navigation_toggler">
           <i class="icon-navicon"></i>
         </button>
@@ -48,32 +48,31 @@
           </ul>
         </div>
       </nav>
-      <main id="home">
-        <!-- Header -->
+      <!-- Home -->
+      <main id="home" class="home">
         <header class="header">
           <div class="header_title">
-            <h2>Landerz<b>.</b></h2>
+            <h2 class="animate_title">Landerz<b>.</b></h2>
           </div>
         </header>
-        <!-- Home -->
-        <section class="home">
-          <div class="home_content">
-            <div class="home_intro">
-              <h1 class="home_intro_title">Grow Your Business Faster</h1>
-              <p class="home_intro_description">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius corrupti velit soluta repellendus?
-              </p>
-              <button type="button" class="home_intro_started">Get Started</button>
-            </div>
-            <figure class="home_image">
-              <img src="assets/images/landing_1.png" alt="">
-            </figure>
+        <div class="home_content">
+          <div class="home_intro">
+            <h1 class="home_intro_title">Grow Your Business Faster</h1>
+            <p class="home_intro_description">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius corrupti velit soluta repellendus?
+            </p>
+            <button type="button" class="home_intro_started">Get Started</button>
           </div>
-        </section>
+          <figure class="home_image">
+            <img src="assets/images/landing_1.png" alt="">
+          </figure>
+        </div>
       </main>
       <!-- Features -->
       <section id="features" class="features">
-        <h4 class="features_title">Features</h4>
+        <div class="features_title">
+          <h4 class="animate_title">Features</h4>
+        </div>
         <div class="features_content">
           <article class="poster">
             <div class="poster_header">
@@ -177,7 +176,9 @@
       <section class="prototypes">
         <div class="prototypes_carousel"></div>
         <div class="prototypes_content">
-          <h4 class="prototypes_title">Create interactive prototypes</h4>
+          <div class="prototypes_title">
+            <h4 class="animate_title">Create interactive prototypes</h4>
+          </div>
           <p class="prototypes_text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit ducimus ab, harum tempore laborum excepturi!</p>
           <ul class="prototypes_list">
             <li class="prototypes_list_item">
@@ -212,7 +213,9 @@
       </section>
       <!-- About Us -->
       <section id="about-us" class="about-us">
-        <h4 class="about-us_title">About Us</h4>
+        <div class="about-us_title">
+          <h4 class="animate_title">About Us</h4>
+        </div>
         <div class="about-us_container">
           <div class="about-us_carousel"></div>
           <div class="about-us_content">
@@ -226,7 +229,9 @@
       </section>
       <!-- Testimonials -->
       <section id="testimonials" class="testimonials">
-        <h4 class="testimonials_title">Testimonials</h4>
+        <div class="testimonials_title">
+          <h4 class="animate_title">Testimonials</h4>
+        </div>
         <div class="testimonials_carousel">
           <div class="testimonials_item">
             <figure class="testimonials_image">
@@ -245,7 +250,9 @@
       </section>
       <!-- Contact -->
       <section id="contact" class="contact">
-        <h4 class="contact_title">Get In Touch</h4>
+        <div class="contact_title">
+          <h4 class="animate_title">Get In Touch</h4>
+        </div>
         <div class="contact_content">
           <h5 class="contact_content_title">Contact Form</h5>
           <form autocomplete="off" spellcheck="false" class="form" onsubmit="event.preventDefault()">
@@ -286,7 +293,6 @@
     </div>
 
     <script type="text/javascript" src="vendor/polyfill/windowscrolling.min.js"></script>
-    <script type="text/javascript" src="vendor/axios.min.js"></script>
     <script type="text/javascript" src="vendor/rxjs.umd.min.js"></script>
     <script type="text/javascript" src="vendor/imagesloaded.min.js"></script>
     <script type="module" src="js/main.js"></script>

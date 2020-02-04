@@ -1,0 +1,25 @@
+.glide {
+  $glide: &;
+
+  cursor: grab;
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
+
+  &--dragging {
+    cursor: grabbing;
+    cursor: -webkit-grabbing;
+    cursor: -moz-grabbing;
+  }
+
+  &__slides {
+    align-items: center;
+  }
+
+  &__track.auto-height {
+    transition: height .2s ease-in-out;
+
+    >#{ $glide }__slides {
+      align-items: flex-start;
+    }
+  }
+}

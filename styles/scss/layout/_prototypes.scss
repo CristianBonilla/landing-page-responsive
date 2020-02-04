@@ -6,7 +6,6 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: center;
 
   &_carousel,
   &_content {
@@ -31,10 +30,17 @@
   }
 
   &_title {
-    font-size: $title-size;
-    font-family: $trueno-family-eb;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
     margin-bottom: .5rem;
-    line-height: 1.2;
+
+    >h4 {
+      font-size: $title-size;
+      font-family: $trueno-family-eb;
+      line-height: 1.2;
+      margin: 0;
+    }
   }
 
   &_text {

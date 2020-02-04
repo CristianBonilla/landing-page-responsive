@@ -5,11 +5,17 @@
   padding: 3rem 0;
 
   &_title {
-    font-size: $title-size-l;
-    font-family: $trueno-family-eb;
-    text-align: center;
-    line-height: 1.2;
-    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0 2rem;
+
+    >h4 {
+      font-size: $title-size-l;
+      font-family: $trueno-family-eb;
+      line-height: 1.2;
+      margin: 0;
+    }
   }
 
   &_carousel {

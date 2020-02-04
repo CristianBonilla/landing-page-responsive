@@ -1,15 +1,16 @@
 export class Scrolling {
   // Experimental class-fields
   // _$currentLink = null;
+  // _handler = null;
 
   constructor($mainLink, [ ...$links ], navbarHeight = 0) {
     this._$mainLink = $mainLink;
     this._anchors = $links.map($l => this._anchor($l));
     this._$currentLink = null;
+    this._handler = null;
     this._scrollListener = () =>
       this.anchorCurrentPosition(false);
     this._navbarHeight = navbarHeight;
-    this._handler = null;
   }
 
   get navbarHeight() {
@@ -27,11 +28,17 @@ export class Scrolling {
   mount() {
     this._$mainLink.addEventListener('click', e => {
       e.preventDefault();
+      if (window.scrollY === 0) {
+        return;
+      }
       window.scrollTo({
         behavior: 'smooth',
         left: 0,
         top: 0
       });
+      if (typeof this._handler === 'function') {
+        this._handler(this._$mainLink, null);
+      }
     });
 
     for (const anchor of this._anchors) {
@@ -92,7 +99,7 @@ export class Scrolling {
     }
   }
 
-  anchorActive({ id, $link, $anchor }, smooth = true) {
+  anchorActive({ $anchor, $link, id }, smooth = true) {
     this._$currentLink = $link;
     this.resetLinksActive();
     if (smooth) {
@@ -112,7 +119,7 @@ export class Scrolling {
     const id = $link.getAttribute('href');
     const $anchor = document.querySelector(id);
 
-    return { id, $anchor, $link };
+    return { $anchor, $link, id };
   }
 
   _scrolling(id, $anchor) {
@@ -122,9 +129,10 @@ export class Scrolling {
       left: 0,
       top
     });
+
     const checkIfDone = setInterval(() => {
       const { top } = this._distance($anchor);
-      if (top === 0 || this._atBottom()) {
+      if (~~top === 0 || this._atBottom()) {
         this._history(id, $anchor);
         window.addEventListener('scroll', this._scrollListener);
         clearInterval(checkIfDone);
@@ -147,8 +155,8 @@ export class Scrolling {
     }
 
     return {
-      top: Math.floor(top),
-      bottom: Math.floor(bottom)
+      top: top,
+      bottom: bottom
     };
   }
 
