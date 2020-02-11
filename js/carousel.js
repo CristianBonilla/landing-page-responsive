@@ -48,13 +48,14 @@ export class Carousel {
   }
 
   mount(items, includeBullets) {
-    const carousel = this._carouselTemplate(items, includeBullets).pipe(
-      mergeMap(t => {
-        this._$element.innerHTML = t;
+    const carousel = this._carouselTemplate(items, includeBullets)
+      .pipe(
+        mergeMap(t => {
+          this._$element.innerHTML = t;
 
-        return this._carouselInstance();
-      }),
-      defaultIfEmpty(null));
+          return this._carouselInstance();
+        }),
+        defaultIfEmpty(null));
 
     return carousel;
   }
@@ -70,35 +71,38 @@ export class Carousel {
 
   _carouselTemplate(items, includeBullets) {
     const bullets = includeBullets ? items.length : 0;
-    const template = this._trackCarouselTemplate(items).pipe(
-      concatMapTo(
-        this._bulletsCarouselTemplate(bullets), (t, b) => t + b),
-      mergeMap(t =>
-        iif(() => !t.length, empty(), of(`<div class="glide">${ t }</div>`))));
+    const template = this._trackCarouselTemplate(items)
+      .pipe(
+        concatMapTo(
+          this._bulletsCarouselTemplate(bullets), (t, b) => t + b),
+        mergeMap(t =>
+          iif(() => !t.length, empty(), of(`<div class="glide">${ t }</div>`))));
 
     return template;
   }
 
   _trackCarouselTemplate(items) {
-    const trackTemplate = from(items).pipe(
-      reduce((a, c) =>
-        a + `<li class="glide__slide">${ c }</li>`, ''),
-      mergeMap(t =>
-        of(!t.length ? '' : `
-          <div class="glide__track" data-glide-el="track">
-            <ul class="glide__slides">${ t }</ul>
-          </div>`)));
+    const trackTemplate = from(items)
+      .pipe(
+        reduce((a, c) =>
+          a + `<li class="glide__slide">${ c }</li>`, ''),
+        mergeMap(t =>
+          of(!t.length ? '' : `
+            <div class="glide__track" data-glide-el="track">
+              <ul class="glide__slides">${ t }</ul>
+            </div>`)));
 
     return trackTemplate;
   }
 
   _bulletsCarouselTemplate(amount) {
-    const bulletTemplate = range(0, amount).pipe(
-      reduce((a, c) =>
-        a + `<button class="glide__bullet" data-glide-dir="${ c }"></button>`, ''),
-      mergeMap(t =>
-        of(!t.length ? '' :
-          `<div class="glide__bullets" data-glide-el="controls[nav]">${ t }</div>`)));
+    const bulletTemplate = range(0, amount)
+      .pipe(
+        reduce((a, c) =>
+          a + `<button class="glide__bullet" data-glide-dir="${ c }"></button>`, ''),
+        mergeMap(t =>
+          of(!t.length ? '' :
+            `<div class="glide__bullets" data-glide-el="controls[nav]">${ t }</div>`)));
 
     return bulletTemplate;
   }

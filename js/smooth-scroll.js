@@ -147,11 +147,14 @@ export class Scrolling {
 
   _distance($anchor) {
     let { top, bottom } = $anchor.getBoundingClientRect();
-    if (top !== 0) {
-      top -= this._navbarHeight;
-    }
-    if (bottom !== 0) {
-      bottom -= this._navbarHeight;
+
+    if (this._navbarHeight > 0) {
+      if (top !== 0) {
+        top -= this._navbarHeight;
+      }
+      if (bottom !== 0) {
+        bottom -= this._navbarHeight;
+      }
     }
 
     return {

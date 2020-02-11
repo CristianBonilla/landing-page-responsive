@@ -73,6 +73,107 @@ animate({
   name: 'zoom'
 });
 
+// Testimonials
+
+const { empty, from, of, zip } = rxjs;
+const { fromFetch } = rxjs.fetch;
+const { distinct, expand, filter, find, last, map, max, mergeAll, min } = rxjs.operators;
+const { pluck, switchMap, toArray, withLatestFrom } = rxjs.operators;
+
+const seenPosts = 3;
+
+function random(minimum, amount) {
+  return Math.floor(Math.random() * amount) + minimum;
+}
+
+function randomNumbers([ min, max ]) {
+  const numbers = of([])
+    .pipe(
+      expand(n => n.length === seenPosts ? empty() :
+        from(Array(seenPosts))
+          .pipe(
+            map(_ => random(min, max)),
+            distinct(),
+            toArray())),
+      last(),
+      mergeAll());
+
+  return numbers;
+}
+
+function randomIndexes(posts) {
+  const fromPosts = from(posts);
+  const order = (a, b) => a.id < b.id ? -1 : 1;
+
+  const indexes = fromPosts
+    .pipe(
+      min(order),
+      withLatestFrom(fromPosts
+        .pipe(
+          max(order))),
+      mergeAll(),
+      pluck('id'),
+      toArray(),
+      switchMap(r => randomNumbers(r)));
+
+  return indexes;
+}
+
+function takePosts(posts) {
+  const take = randomIndexes(posts)
+    .pipe(
+      switchMap(i => from(posts)
+        .pipe(
+          find(({ id }) => id === i))),
+      toArray());
+
+  return take;
+}
+
+function postsByUserId(id, posts) {
+  const findPosts = from(posts)
+    .pipe(
+      filter(({ userId }) => userId === id),
+      toArray());
+
+  return findPosts;
+}
+
+function usersByPosts(users, posts) {
+  const findUsers = from(posts)
+    .pipe(
+      distinct(({ userId }) => userId),
+      switchMap(({ userId }) => from(users)
+        .pipe(
+          find(({ id }) => id === userId))));
+
+  return findUsers;
+}
+
+function groupByUsers(users, posts) {
+  const group = usersByPosts(users, posts)
+    .pipe(
+      switchMap(u => zip(
+        of(u),
+        postsByUserId(u.id, posts))));
+
+  return group;
+}
+
+const posts = fromFetch('https://jsonplaceholder.typicode.com/posts')
+  .pipe(
+    switchMap(response => response.json()));
+const users = fromFetch('https://jsonplaceholder.typicode.com/users')
+  .pipe(
+    switchMap(response => response.json()));
+
+zip(users, posts)
+  .pipe(
+    switchMap(([ u, p ]) => takePosts(p)
+      .pipe(
+        switchMap(p => groupByUsers(u, p)))))
+  .subscribe(console.log);
+
 function* subscriptions() {
   yield prototypesSubscription;
   yield aboutSubscription;

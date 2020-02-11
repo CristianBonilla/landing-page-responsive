@@ -11,8 +11,10 @@ export default function animate(...sources) {
       continue;
     }
     if (Array.isArray($el)) {
-      const recursion = $el.map($e => ({ $el: $e, name, loop }));
-      animate(...recursion);
+      const animateRecursion = $el.map($el => {
+        return { $el, name, loop };
+      });
+      animate(...animateRecursion);
       continue;
     }
     const animation = `animate_${ name }`;
