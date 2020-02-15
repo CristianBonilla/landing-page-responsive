@@ -11,7 +11,7 @@
   }
 
   &_text {
-    font-size: calc(#{ $default-text-size } - .2rem);
+    font-size: .8rem;
     color: $footer-text-color;
     margin: 0;
     opacity: 1;

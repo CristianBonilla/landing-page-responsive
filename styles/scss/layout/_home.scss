@@ -30,7 +30,7 @@
     }
 
     &_description {
-      font-size: calc(#{ $default-text-size } - .2rem);
+      font-size: .8rem;
       line-height: $text-line-height;
       color: $text-color;
       margin-bottom: 1rem;

@@ -79,7 +79,7 @@ export class Scrolling {
     const anchor = this._anchors.find(({ $anchor }) => {
       const { top, bottom } = this._distance($anchor);
 
-      return top <= 0 && bottom > 0;
+      return ~~top <= 0 && ~~bottom > 0;
     });
 
     return anchor;

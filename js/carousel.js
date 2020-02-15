@@ -17,8 +17,8 @@ export class Carousel {
 
   constructor(selector, carouselOptions = { }) {
     this._selector = selector;
-    this._carouselOptions = carouselOptions;
     this._$element = document.querySelector(this._selector);
+    this._carouselOptions = carouselOptions;
     this._carouselOptionsDefault = {
       type: 'carousel',
       autoplay: 5000,
@@ -47,34 +47,36 @@ export class Carousel {
     return extend;
   }
 
-  mount(items, includeBullets) {
+  mount(items, includeBullets, modules = { }) {
     const carousel = this._carouselTemplate(items, includeBullets)
       .pipe(
         mergeMap(t => {
           this._$element.innerHTML = t;
 
-          return this._carouselInstance();
+          return this._carouselInstance(modules);
         }),
         defaultIfEmpty(null));
 
     return carousel;
   }
 
-  _carouselInstance() {
-    const instance = new Glide(`${ this._selector }>.glide`, {
+  _carouselInstance(modules) {
+    const carousel = new Glide(`${ this._selector }>.glide`, {
       ...this._carouselOptionsDefault,
       ...this._carouselOptions
     });
+    carousel.mount(modules);
 
-    return of(instance);
+    return of(carousel);
   }
 
   _carouselTemplate(items, includeBullets) {
-    const bullets = includeBullets ? items.length : 0;
+    const bulletsAmount = includeBullets ? items.length : 0;
     const template = this._trackCarouselTemplate(items)
       .pipe(
         concatMapTo(
-          this._bulletsCarouselTemplate(bullets), (t, b) => t + b),
+          this._bulletsCarouselTemplate(bulletsAmount),
+          (t, b) => t + b),
         mergeMap(t =>
           iif(() => !t.length, empty(), of(`<div class="glide">${ t }</div>`))));
 

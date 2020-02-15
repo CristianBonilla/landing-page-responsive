@@ -1,7 +1,7 @@
 // DOM interaction
-import { Toggle } from './navigation-toggle.js';
-import { Scrolling } from './smooth-scroll.js';
-import { prototypes, about } from './images.js';
+import { Toggle } from './navigationToggle.js';
+import { Scrolling } from './smoothScroll.js';
+import { prototypesImages, aboutImages, testimonialsImages } from './imagePaths.js';
 import { Carousel } from './carousel.js';
 import animate from './animate.js';
 
@@ -27,29 +27,25 @@ toggle.handler = () => scrolling.navbarHeight = toggle.navbarHeight();
 
 // const carouselAutoHeight = Carousel.setAutoHeight;
 
-const prototypesTemplate = prototypes.map(p => `
+const prototypesTemplate = prototypesImages.map(p => `
   <figure class="prototypes_image">
     <img src="${ p }" alt="">
   </figure>`);
 const prototypesCarousel = new Carousel('.prototypes .prototypes_carousel');
-const prototypesSubscription = prototypesCarousel.mount(prototypesTemplate)
-  .subscribe(carousel => {
-    if (carousel) {
-      carousel.mount(/* { carouselAutoHeight } */);
-    }
-  });
+const prototypes = prototypesCarousel.mount(
+  prototypesTemplate,
+  false
+  /* { carouselAutoHeight } */);
 
-const aboutTemplate = about.map(a => `
+const aboutTemplate = aboutImages.map(a => `
   <figure class="about-us_image">
     <img src="${ a }" alt="">
   </figure>`);
 const aboutCarousel = new Carousel('.about-us .about-us_carousel');
-const aboutSubscription = aboutCarousel.mount(aboutTemplate)
-  .subscribe(carousel => {
-    if (carousel) {
-      carousel.mount(/* { carouselAutoHeight } */);
-    }
-  });
+const about = aboutCarousel.mount(
+  aboutTemplate,
+  false,
+  /* { carouselAutoHeight } */);
 
 // DOM animations
 
@@ -77,20 +73,20 @@ animate({
 
 const { empty, from, of, zip } = rxjs;
 const { fromFetch } = rxjs.fetch;
-const { distinct, expand, filter, find, last, map, max, mergeAll, min } = rxjs.operators;
-const { pluck, switchMap, toArray, withLatestFrom } = rxjs.operators;
+const { distinct, expand, find, first, last, map, max, mergeAll, min } = rxjs.operators;
+const { pluck, switchMap, take, toArray, withLatestFrom } = rxjs.operators;
 
-const seenPosts = 3;
+const seenPosts = 4;
 
 function random(minimum, amount) {
   return Math.floor(Math.random() * amount) + minimum;
 }
 
-function randomNumbers([ min, max ]) {
+function randomNumbers([ min, max ], length = max) {
   const numbers = of([])
     .pipe(
-      expand(n => n.length === seenPosts ? empty() :
-        from(Array(seenPosts))
+      expand(n => n.length === length ? empty() :
+        from(Array(length))
           .pipe(
             map(_ => random(min, max)),
             distinct(),
@@ -103,18 +99,18 @@ function randomNumbers([ min, max ]) {
 
 function randomIndexes(posts) {
   const fromPosts = from(posts);
-  const order = (a, b) => a.id < b.id ? -1 : 1;
+  const compare = (a, b) => a.id < b.id ? -1 : 1;
 
   const indexes = fromPosts
     .pipe(
-      min(order),
+      min(compare),
       withLatestFrom(fromPosts
         .pipe(
-          max(order))),
+          max(compare))),
       mergeAll(),
       pluck('id'),
       toArray(),
-      switchMap(r => randomNumbers(r)));
+      switchMap(range => randomNumbers(range, seenPosts)));
 
   return indexes;
 }
@@ -122,42 +118,99 @@ function randomIndexes(posts) {
 function takePosts(posts) {
   const take = randomIndexes(posts)
     .pipe(
-      switchMap(i => from(posts)
+      switchMap(index => from(posts)
         .pipe(
-          find(({ id }) => id === i))),
+          find(({ id }) => id === index))),
       toArray());
 
   return take;
 }
 
-function postsByUserId(id, posts) {
-  const findPosts = from(posts)
-    .pipe(
-      filter(({ userId }) => userId === id),
-      toArray());
-
-  return findPosts;
-}
-
 function usersByPosts(users, posts) {
-  const findUsers = from(posts)
+  const usersBy = from(posts)
     .pipe(
       distinct(({ userId }) => userId),
       switchMap(({ userId }) => from(users)
         .pipe(
-          find(({ id }) => id === userId))));
+          find(({ id }) => id === userId))),
+      toArray());
 
-  return findUsers;
+  return usersBy;
 }
 
-function groupByUsers(users, posts) {
-  const group = usersByPosts(users, posts)
+function group(users, posts) {
+  const usersWithPosts = takePosts(posts)
     .pipe(
-      switchMap(u => zip(
-        of(u),
-        postsByUserId(u.id, posts))));
+      switchMap(posts => zip(
+        usersByPosts(users, posts),
+        of(posts))));
 
-  return group;
+  return usersWithPosts;
+}
+
+function userById(users, userId) {
+  return users.find(({ id }) => id === userId);
+}
+
+function postWithUser(users, posts) {
+  const join = from(posts)
+    .pipe(
+      map(post => [
+        userById(users, post.userId),
+        post
+      ]));
+
+  return join;
+}
+
+function randomImagePaths() {
+  const maxLength = testimonialsImages.length;
+  const paths = randomNumbers([ 0, maxLength ])
+    .pipe(
+      toArray(),
+      switchMap(numbers => of(0)
+        .pipe(
+          expand(count => of(count % maxLength === maxLength - 1 ? 0 : ++count)),
+          take(seenPosts),
+          map(index => testimonialsImages[numbers[index]]))));
+
+  return paths;
+}
+
+function itemsTemplate(users, posts) {
+  const items = zip(
+    postWithUser(users, posts),
+    randomImagePaths())
+    .pipe(
+      map(([ [ { name }, { body } ], imagePath ]) => `
+        <div class="testimonials_item">
+          <figure class="testimonials_image">
+            <img src="${ imagePath }" alt="">
+          </figure>
+          <blockquote>
+            <p>
+              <cite>"${ body }"</cite>
+            </p>
+            <strong>${ name }</strong>
+          </blockquote>
+        </div>`),
+      toArray());
+
+  return items;
+}
+
+function buildTestimonials([ users, posts ]) {
+  const build = group(users, posts)
+    .pipe(
+      switchMap(([ users, posts ]) => itemsTemplate(users, posts)
+        .pipe(
+          switchMap(items => {
+            const carousel = new Carousel('.testimonials .testimonials_carousel');
+
+            return carousel.mount(items, true);
+          }))));
+
+  return build;
 }
 
 const posts = fromFetch('https://jsonplaceholder.typicode.com/posts')
@@ -167,18 +220,12 @@ const users = fromFetch('https://jsonplaceholder.typicode.com/users')
   .pipe(
     switchMap(response => response.json()));
 
-zip(users, posts)
+const testimonials = zip(users, posts)
   .pipe(
-    switchMap(([ u, p ]) => takePosts(p)
-      .pipe(
-        switchMap(p => groupByUsers(u, p)))))
-  .subscribe(console.log);
+    switchMap(buildTestimonials));
 
-function* subscriptions() {
-  yield prototypesSubscription;
-  yield aboutSubscription;
-}
-
-for (const subscription of subscriptions()) {
-  subscription.unsubscribe();
-}
+zip(
+  prototypes,
+  about,
+  testimonials)
+  .subscribe();

@@ -58,7 +58,7 @@
         padding: 1rem 0;
         text-align: center;
         line-height: 1.2;
-        font-size: calc(#{ $default-text-size } - .1rem);
+        font-size: .9rem;
         transition: $transition-color;
 
         &.active {
@@ -133,11 +133,11 @@
 
     &_title {
       padding: .3rem 0;
-      font-size: calc(#{ $default-text-size } + .2rem);
+      font-size: .8rem;
       display: none;
 
       >b {
-        font-size: calc(#{ $default-text-size } + .4rem);
+        font-size: .6rem;
       }
     }
 

@@ -39,14 +39,13 @@
       text-align: center;
 
       p {
-        font-size: calc(#{ $default-text-size } - .2rem);
+        font-size: .9rem;
         color: $text-color;
         margin-bottom: .8rem;
       }
 
       strong {
-        font-family: $trueno-family-sb;
-        font-size: $text-size;
+        font-size: .82rem;
       }
     }
   }
