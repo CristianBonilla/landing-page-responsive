@@ -168,11 +168,15 @@ function randomImagePaths() {
   const paths = randomNumbers([ 0, maxLength ])
     .pipe(
       toArray(),
-      switchMap(numbers => of(0)
-        .pipe(
-          expand(count => of(count % maxLength === maxLength - 1 ? 0 : ++count)),
-          take(seenPosts),
-          map(index => testimonialsImages[numbers[index]]))));
+      expand(numbers => {
+        numbers.splice(numbers.length - 2, 0, numbers.shift());
+        numbers.splice(numbers.length - 1, 0, numbers.pop());
+
+        return of(numbers);
+      }),
+      mergeAll(),
+      take(seenPosts),
+      map(index => testimonialsImages[index]));
 
   return paths;
 }
