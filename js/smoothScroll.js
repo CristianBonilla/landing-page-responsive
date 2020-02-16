@@ -48,12 +48,12 @@ export class Scrolling {
       });
     }
 
-    // const anchor = this.anchorByHref(location.href);
-    // if (anchor) {
-    //   this.anchorScrolling(anchor);
-    // } else {
-    //   this.anchorCurrentPosition();
-    // }
+    const anchor = this.anchorByHref(location.href);
+    if (anchor) {
+      this.anchorScrolling(anchor);
+    } else {
+      this.anchorCurrentPosition();
+    }
 
     window.addEventListener('scroll', this._scrollListener);
   }
@@ -132,7 +132,7 @@ export class Scrolling {
 
     const checkIfDone = setInterval(() => {
       const { top } = this._distance($anchor);
-      if (~~top === 0 || this._atBottom()) {
+      if (top === 0 || this._atBottom()) {
         this._history(id, $anchor);
         window.addEventListener('scroll', this._scrollListener);
         clearInterval(checkIfDone);

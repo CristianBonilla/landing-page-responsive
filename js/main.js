@@ -3,7 +3,7 @@ import { Toggle } from './navigationToggle.js';
 import { Scrolling } from './smoothScroll.js';
 import { prototypesImages, aboutImages, testimonialsImages } from './imagePaths.js';
 import { Carousel } from './carousel.js';
-import animate from './animate.js';
+import { animate } from './animate.js';
 
 const $toggler = document.getElementById('navigation_toggler');
 const $content = document.querySelector('.navigation_content');
@@ -56,7 +56,8 @@ const $image = $home.querySelector('.home_image');
 
 animate({
   $el: $menu,
-  name: 'slide'
+  name: 'slide',
+  mediaQuery: window.matchMedia('(min-width: 576px)')
 }, {
   $el: [ ...$titles ],
   name: 'rubber',
