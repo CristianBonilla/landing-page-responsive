@@ -27,6 +27,7 @@ export class Carousel {
       hoverpause: false,
       perView: 1,
       rewindDuration: 1000,
+      swipeThreshold: 80,
       type: 'carousel'
     };
   }
@@ -70,8 +71,8 @@ export class Carousel {
     const carousel = new Glide(selector, options);
     carousel.mount(modules);
 
-    const { dragThreshold } = options;
-    if (!dragThreshold) {
+    const { dragThreshold, swipeThreshold } = options;
+    if (!dragThreshold || !swipeThreshold) {
       document.querySelector(selector)
         .classList.add('glide--not--draggable');
     }

@@ -52,7 +52,7 @@ export class Scrolling {
     if (anchor) {
       this.anchorScrolling(anchor);
     } else {
-      this.anchorCurrentPosition();
+      this.anchorCurrentPosition(false);
     }
 
     window.addEventListener('scroll', this._scrollListener);
@@ -79,7 +79,7 @@ export class Scrolling {
     const anchor = this._anchors.find(({ $anchor }) => {
       const { top, bottom } = this._distance($anchor);
 
-      return ~~top <= 0 && ~~bottom > 0;
+      return ~~top <= 1 && ~~bottom > 0;
     });
 
     return anchor;
@@ -132,7 +132,7 @@ export class Scrolling {
 
     const checkIfDone = setInterval(() => {
       const { top } = this._distance($anchor);
-      if (top === 0 || this._atBottom()) {
+      if (~~top === 0 || this._atBottom()) {
         this._history(id, $anchor);
         window.addEventListener('scroll', this._scrollListener);
         clearInterval(checkIfDone);
