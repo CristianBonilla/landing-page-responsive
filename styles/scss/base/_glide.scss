@@ -1,0 +1,64 @@
+.glide {
+  $glide: &;
+
+  &:not(&--not--draggable) {
+    cursor: grab;
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
+
+    &#{ $glide }--dragging {
+      cursor: grabbing;
+      cursor: -webkit-grabbing;
+      cursor: -moz-grabbing;
+    }
+  }
+
+  &__slides {
+    align-items: center;
+  }
+
+  &__track.auto-height {
+    transition: height .2s ease-in-out;
+
+    >#{ $glide }__slides {
+      align-items: flex-start;
+    }
+  }
+
+  &__bullets {
+    position: absolute;
+    bottom: -1.5rem;
+    left: 50%;
+    display: inline-flex;
+    transform: translateX(-50%);
+
+    #{ $glide }__bullet {
+      background-color: #D4D4D4;
+      width: 9px;
+      height: 9px;
+      padding: 0;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      transition: all .3s ease-in-out;
+      cursor: pointer;
+      line-height: 0;
+      margin: 0 .2rem;
+
+      &--active {
+        background-color: $cyan-active-color;
+      }
+    }
+  }
+}
+
+@media (min-width: 576px) {
+  .glide {
+
+    &__bullet {
+
+      &#{ & }:not(&--active):hover {
+        background-color: #BDBDBD;
+      }
+    }
+  }
+}

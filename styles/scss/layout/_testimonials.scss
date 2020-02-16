@@ -1,0 +1,105 @@
+.testimonials {
+  min-height: 80vh;
+  width: 100%;
+  background-color: $white-color;
+  padding: 3rem 0;
+
+  &_title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0 2rem;
+
+    >h4 {
+      font-size: $title-size-l;
+      font-family: $trueno-family-eb;
+      line-height: 1.2;
+      margin: 0;
+    }
+  }
+
+  &_carousel {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 .2rem;
+  }
+
+  &_item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+
+    >blockquote {
+      line-height: $text-line-height;
+      width: 100%;
+      text-align: center;
+
+      p {
+        font-size: .9rem;
+        color: $text-color;
+        margin-bottom: .8rem;
+      }
+
+      strong {
+        font-size: .82rem;
+      }
+    }
+  }
+
+  &_image {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: .5rem;
+
+    >img {
+      display: block;
+      margin: 1rem auto 1.5rem;
+      max-width: 80px;
+      width: auto;
+      max-height: 100px;
+      border-radius: 50%;
+      @include image-shadow;
+    }
+  }
+}
+
+@media (min-width: 576px) {
+  .testimonials_carousel {
+    width: 85%;
+    padding: 0 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .testimonials {
+
+    &_carousel {
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+
+    &_item {
+
+      >blockquote {
+        width: 85%;
+      }
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  .testimonials_item {
+
+    >blockquote {
+      padding: 0 2rem;
+      width: 75%;
+    }
+  }
+}

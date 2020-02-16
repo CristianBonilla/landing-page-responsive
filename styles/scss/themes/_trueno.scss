@@ -1,0 +1,47 @@
+@font-face {
+  font-family: 'truenoregular';
+  src: url('#{ $fonts-url }/trueno/truenorg.eot');
+  src: url('#{ $fonts-url }/trueno/truenorg.eot?#iefix') format('embedded-opentype'),
+    url('#{ $fonts-url }/trueno/truenorg.woff2') format('woff2'),
+    url('#{ $fonts-url }/trueno/truenorg.woff') format('woff'),
+    url('#{ $fonts-url }/trueno/truenorg.ttf') format('truetype'),
+    url('#{ $fonts-url }/trueno/truenorg.svg#truenoregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'truenosemibold';
+  src: url('#{ $fonts-url }/trueno/truenosbd.eot');
+  src: url('#{ $fonts-url }/trueno/truenosbd.eot?#iefix') format('embedded-opentype'),
+    url('#{ $fonts-url }/trueno/truenosbd.woff2') format('woff2'),
+    url('#{ $fonts-url }/trueno/truenosbd.woff') format('woff'),
+    url('#{ $fonts-url }/trueno/truenosbd.ttf') format('truetype'),
+    url('#{ $fonts-url }/trueno/truenosbd.svg#truenosemibold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'truenobold';
+  src: url('#{ $fonts-url }/trueno/truenobd.eot');
+  src: url('#{ $fonts-url }/trueno/truenobd.eot?#iefix') format('embedded-opentype'),
+    url('#{ $fonts-url }/trueno/truenobd.woff2') format('woff2'),
+    url('#{ $fonts-url }/trueno/truenobd.woff') format('woff'),
+    url('#{ $fonts-url }/trueno/truenobd.ttf') format('truetype'),
+    url('#{ $fonts-url }/trueno/truenobd.svg#truenobold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'truenoextrabold';
+  src: url('#{ $fonts-url }/trueno/truenoexbd.eot');
+  src: url('#{ $fonts-url }/trueno/truenoexbd.eot?#iefix') format('embedded-opentype'),
+    url('#{ $fonts-url }/trueno/truenoexbd.woff2') format('woff2'),
+    url('#{ $fonts-url }/trueno/truenoexbd.woff') format('woff'),
+    url('#{ $fonts-url }/trueno/truenoexbd.ttf') format('truetype'),
+    url('#{ $fonts-url }/trueno/truenoexbd.svg#truenoextrabold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}

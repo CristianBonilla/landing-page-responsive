@@ -1,0 +1,19 @@
+@mixin landing-button {
+  margin-top: 1.5rem;
+  font-size: calc(#{ $default-text-size } - .1rem);
+  color: $white-color;
+  cursor: pointer;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 50rem;
+  background-image: linear-gradient(to left, $cyan-color 50%, $cyan-transition-color 50%);
+  background-position: 100% 0;
+  background-size: 201% 100%;
+  transition: all 400ms ease-in;
+  @include cyan-shadow;
+
+  &:hover,
+  &:focus {
+    background-position: 0 0;
+  }
+}

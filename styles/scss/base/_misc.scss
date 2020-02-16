@@ -1,0 +1,64 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: #{ $sans-serif-family };
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body {
+  font-family: #{ $trueno-family-r }, #{ $sans-serif-family };
+  font-size: $default-text-size;
+  line-height: $default-line-height;
+  background-color: $background-color;
+  color: $default-text-color;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a,
+button,
+input,
+textarea,
+main,
+section {
+  outline: none;
+
+  &:hover,
+  &:focus,
+  &:active {
+    outline: none;
+  }
+}
+
+a,
+button {
+  text-decoration: none;
+  border: 0;
+}
+
+.wrapper {
+  position: relative;
+  top: 0;
+  min-height: 100vh;
+  height: auto;
+  padding-bottom: 54px;
+  margin: 0;
+}
+
+@media (min-width: 576px) {
+  .wrapper {
+    min-height: calc(100vh - 46px);
+  }
+}

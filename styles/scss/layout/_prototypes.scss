@@ -1,0 +1,114 @@
+.prototypes {
+  min-height: 100vh;
+  background-color: $white-color;
+  padding: 3rem 1rem;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  &_carousel,
+  &_content {
+    position: relative;
+    width: 100%;
+    padding: 0;
+    margin: .5rem 0;
+  }
+
+  &_carousel {
+    display: flex;
+    align-items: center;
+  }
+
+  &_image {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+
+    >img {
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      width: auto;
+      max-height: 400px;
+    }
+  }
+
+  &_title {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: .5rem;
+
+    >h4 {
+      font-size: $title-size;
+      font-family: $trueno-family-eb;
+      line-height: 1.2;
+      margin: 0;
+    }
+  }
+
+  &_text {
+    padding: 1rem 0;
+    font-size: $text-size;
+    color: $text-light-color;
+    line-height: $text-line-height;
+    margin-bottom: 1rem;
+  }
+
+  &_list {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 2rem;
+
+    >li {
+      list-style: none;
+      font-size: $text-size;
+      color: $text-light-color;
+      line-height: $text-line-height;
+      padding: .25rem 0;
+
+      >i {
+        font-size: 1.2rem;
+        color: $done-color;
+        font-weight: 800;
+      }
+    }
+  }
+
+  // .card { }
+}
+
+@media (min-width: 576px) {
+  .prototypes {
+    min-height: calc(100vh - 46px);
+
+    &_carousel,
+    &_content {
+      padding: 0 15px;
+    }
+
+    &_carousel {
+      flex: 0 0 55%;
+      max-width: 55%;
+    }
+
+    &_content {
+      flex: 0 0 45%;
+      max-width: 45%;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .prototypes_content {
+    padding-right: 2rem;
+    padding-left: 2rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .prototypes_content {
+    padding-right: 8rem;
+  }
+}

@@ -1,0 +1,44 @@
+.contact {
+  min-height: 100vh;
+  width: 100%;
+  padding: 3rem 0;
+  background-color: transparent;
+
+  &_title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 0 3rem;
+
+    >h4 {
+      font-size: $title-size-l;
+      font-family: $trueno-family-eb;
+      line-height: 1.2;
+      margin: 0;
+    }
+  }
+
+  &_content {
+    background-color: $white-color;
+    max-width: 600px;
+    display: block;
+    margin: 0 auto;
+    padding: 1rem;
+
+    &_title {
+      padding: 1rem 1.7rem;
+      margin: 0 .5rem .7rem;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: $title-color;
+    }
+
+    // .form { }
+  }
+}
+
+@media (min-width: 576px) {
+  .contact {
+    min-height: calc(100vh - 46px);
+  }
+}
