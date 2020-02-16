@@ -19,10 +19,12 @@
   }
 
   &_carousel {
+    display: flex;
+    align-items: center;
     position: relative;
     width: 100%;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 0 .2rem;
   }
 
   &_item {
@@ -71,6 +73,7 @@
 @media (min-width: 576px) {
   .testimonials_carousel {
     width: 85%;
+    padding: 0 1rem;
   }
 }
 

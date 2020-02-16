@@ -20,13 +20,14 @@ export class Carousel {
     this._$element = document.querySelector(this._selector);
     this._carouselOptions = carouselOptions;
     this._carouselOptionsDefault = {
-      type: 'carousel',
+      animationDuration: 1000,
       autoplay: 5000,
-      hoverpause: false,
+      dragThreshold: 120,
       gap: 0,
+      hoverpause: false,
       perView: 1,
       rewindDuration: 1000,
-      animationDuration: 1000
+      type: 'carousel'
     };
   }
 
@@ -61,11 +62,19 @@ export class Carousel {
   }
 
   _carouselInstance(modules) {
-    const carousel = new Glide(`${ this._selector }>.glide`, {
+    const selector = `${ this._selector }>.glide`;
+    const options = {
       ...this._carouselOptionsDefault,
       ...this._carouselOptions
-    });
+    }
+    const carousel = new Glide(selector, options);
     carousel.mount(modules);
+
+    const { dragThreshold } = options;
+    if (!dragThreshold) {
+      document.querySelector(selector)
+        .classList.add('glide--not--draggable');
+    }
 
     return of(carousel);
   }
@@ -101,7 +110,7 @@ export class Carousel {
     const bulletTemplate = range(0, amount)
       .pipe(
         reduce((a, c) =>
-          a + `<button class="glide__bullet" data-glide-dir="${ c }"></button>`, ''),
+          a + `<button class="glide__bullet" data-glide-dir="=${ c }"></button>`, ''),
         mergeMap(t =>
           of(!t.length ? '' :
             `<div class="glide__bullets" data-glide-el="controls[nav]">${ t }</div>`)));

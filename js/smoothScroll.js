@@ -48,12 +48,12 @@ export class Scrolling {
       });
     }
 
-    const anchor = this.anchorByHref(location.href);
-    if (anchor) {
-      this.anchorScrolling(anchor);
-    } else {
-      this.anchorCurrentPosition();
-    }
+    // const anchor = this.anchorByHref(location.href);
+    // if (anchor) {
+    //   this.anchorScrolling(anchor);
+    // } else {
+    //   this.anchorCurrentPosition();
+    // }
 
     window.addEventListener('scroll', this._scrollListener);
   }

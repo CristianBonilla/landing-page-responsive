@@ -44,7 +44,7 @@ const aboutTemplate = aboutImages.map(a => `
 const aboutCarousel = new Carousel('.about-us .about-us_carousel');
 const about = aboutCarousel.mount(
   aboutTemplate,
-  false,
+  false
   /* { carouselAutoHeight } */);
 
 // DOM animations
@@ -73,7 +73,7 @@ animate({
 
 const { empty, from, of, zip } = rxjs;
 const { fromFetch } = rxjs.fetch;
-const { distinct, expand, find, first, last, map, max, mergeAll, min } = rxjs.operators;
+const { distinct, expand, find, last, map, max, mergeAll, min } = rxjs.operators;
 const { pluck, switchMap, take, toArray, withLatestFrom } = rxjs.operators;
 
 const seenPosts = 4;
@@ -209,7 +209,9 @@ function buildTestimonials([ users, posts ]) {
       switchMap(([ users, posts ]) => itemsTemplate(users, posts)
         .pipe(
           switchMap(items => {
-            const carousel = new Carousel('.testimonials .testimonials_carousel');
+            const carousel = new Carousel('.testimonials .testimonials_carousel', {
+              dragThreshold: false
+            });
 
             return carousel.mount(items, true);
           }))));

@@ -15,6 +15,11 @@
     margin: .5rem 0;
   }
 
+  &_carousel {
+    display: flex;
+    align-items: center;
+  }
+
   &_image {
     position: relative;
     width: 100%;

@@ -1,14 +1,16 @@
 .glide {
   $glide: &;
 
-  cursor: grab;
-  cursor: -webkit-grab;
-  cursor: -moz-grab;
+  &:not(&--not--draggable) {
+    cursor: grab;
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
 
-  &--dragging {
-    cursor: grabbing;
-    cursor: -webkit-grabbing;
-    cursor: -moz-grabbing;
+    &#{ $glide }--dragging {
+      cursor: grabbing;
+      cursor: -webkit-grabbing;
+      cursor: -moz-grabbing;
+    }
   }
 
   &__slides {
@@ -20,6 +22,43 @@
 
     >#{ $glide }__slides {
       align-items: flex-start;
+    }
+  }
+
+  &__bullets {
+    position: absolute;
+    bottom: -2rem;
+    left: 50%;
+    display: inline-flex;
+    transform: translateX(-50%);
+
+    #{ $glide }__bullet {
+      background-color: #D4D4D4;
+      width: 9px;
+      height: 9px;
+      padding: 0;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      transition: all .3s ease-in-out;
+      cursor: pointer;
+      line-height: 0;
+      margin: 0 .2rem;
+
+      &--active {
+        background-color: $cyan-active-color;
+      }
+    }
+  }
+}
+
+@media (min-width: 576px) {
+  .glide {
+
+    &__bullet {
+
+      &#{ & }:not(&--active):hover {
+        background-color: #BDBDBD;
+      }
     }
   }
 }
