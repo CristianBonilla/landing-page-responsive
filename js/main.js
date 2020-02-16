@@ -211,7 +211,8 @@ function buildTestimonials([ users, posts ]) {
         .pipe(
           switchMap(items => {
             const carousel = new Carousel('.testimonials .testimonials_carousel', {
-              dragThreshold: false
+              dragThreshold: false,
+              swipeThreshold: false
             });
 
             return carousel.mount(items, true);
