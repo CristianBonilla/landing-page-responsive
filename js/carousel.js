@@ -1,6 +1,6 @@
 import Glide from '../vendor/glide.esm.js';
 
-const { empty, from, iif, of, range } = rxjs;
+const { empty, from, of, range } = rxjs;
 const { concatMapTo, defaultIfEmpty, mergeMap, reduce } = rxjs.operators;
 
 export class Carousel {
@@ -52,8 +52,8 @@ export class Carousel {
   mount(items, includeBullets, modules = { }) {
     const carousel = this._carouselTemplate(items, includeBullets)
       .pipe(
-        mergeMap(t => {
-          this._$element.innerHTML = t;
+        mergeMap(html => {
+          this._$element.innerHTML = html;
 
           return this._carouselInstance(modules);
         }),
@@ -86,9 +86,12 @@ export class Carousel {
       .pipe(
         concatMapTo(
           this._bulletsCarouselTemplate(bulletsAmount),
-          (t, b) => t + b),
-        mergeMap(t =>
-          iif(() => !t.length, empty(), of(`<div class="glide">${ t }</div>`))));
+          (content, bullets) => content + bullets),
+        mergeMap(content => {
+          const html = !content.length ? empty() : of(`<div class="glide">${ content }</div>`);
+
+          return html;
+        }));
 
     return template;
   }
@@ -96,26 +99,32 @@ export class Carousel {
   _trackCarouselTemplate(items) {
     const trackTemplate = from(items)
       .pipe(
-        reduce((a, c) =>
-          a + `<li class="glide__slide">${ c }</li>`, ''),
-        mergeMap(t =>
-          of(!t.length ? '' : `
+        reduce((slides, item) =>
+          slides + `<li class="glide__slide">${ item }</li>`, ''),
+        mergeMap(slides => {
+          const html = !slides.length ? '' : `
             <div class="glide__track" data-glide-el="track">
-              <ul class="glide__slides">${ t }</ul>
-            </div>`)));
+              <ul class="glide__slides">${ slides }</ul>
+            </div>`;
+
+          return of(html);
+        }));
 
     return trackTemplate;
   }
 
   _bulletsCarouselTemplate(amount) {
-    const bulletTemplate = range(0, amount)
+    const bulletsTemplate = range(0, amount)
       .pipe(
-        reduce((a, c) =>
-          a + `<button class="glide__bullet" data-glide-dir="=${ c }"></button>`, ''),
-        mergeMap(t =>
-          of(!t.length ? '' :
-            `<div class="glide__bullets" data-glide-el="controls[nav]">${ t }</div>`)));
+        reduce((bullets, index) =>
+          bullets + `<button class="glide__bullet" data-glide-dir="=${ index }"></button>`, ''),
+        mergeMap(bullets => {
+          const html = !bullets.length ? '' : `
+            <div class="glide__bullets" data-glide-el="controls[nav]">${ t }</div>`;
 
-    return bulletTemplate;
+          return html;
+        }));
+
+    return bulletsTemplate;
   }
 }

@@ -23,8 +23,8 @@ export class Toggle {
   }
 
   mount() {
-    const toggleListener = e => this._toggle(e);
-    const scopeListener = e => this._toggleScope(e);
+    const toggleListener = event => this._toggle(event);
+    const scopeListener = event => this._toggleScope(event);
     // this._mediaQuery.addEventListener('change', ({ matches }) => {
     this._mediaQuery.addListener(({ matches }) =>
       this._mediaQueryChange(matches, toggleListener, scopeListener));
@@ -92,7 +92,7 @@ export class Toggle {
   }
 
   _transitionEnd(isVisible) {
-    this._$menuContent.addEventListener('transitionend', () => {
+    this._$menuContent.addEventListener('transitionend', _ => {
       if (!isVisible) {
         this._removeClass();
       }
@@ -104,7 +104,7 @@ export class Toggle {
   }
 
   _hasClassMenu(...classes) {
-    return classes.every(c => this._$menuContent.classList.contains(c));
+    return classes.every(hasClass => this._$menuContent.classList.contains(hasClass));
   }
 
   _heightFormat(height) {

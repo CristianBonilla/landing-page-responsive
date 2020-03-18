@@ -84,9 +84,9 @@ function random(minimum, amount) {
 }
 
 function randomNumbers([ min, max ], length = max) {
-  const numbers = of([])
+  const generatedNumbers = of([])
     .pipe(
-      expand(n => n.length === length ? empty() :
+      expand(numbers => numbers.length === length ? empty() :
         from(Array(length))
           .pipe(
             map(_ => random(min, max)),
@@ -95,12 +95,12 @@ function randomNumbers([ min, max ], length = max) {
       last(),
       mergeAll());
 
-  return numbers;
+  return generatedNumbers;
 }
 
 function randomIndexes(posts) {
   const fromPosts = from(posts);
-  const compare = (a, b) => a.id < b.id ? -1 : 1;
+  const compare = (postA, postB) => postA.id < postB.id ? -1 : 1;
 
   const indexes = fromPosts
     .pipe(
@@ -210,7 +210,8 @@ function buildTestimonials([ users, posts ]) {
       switchMap(([ users, posts ]) => itemsTemplate(users, posts)
         .pipe(
           switchMap(items => {
-            const carousel = new Carousel('.testimonials .testimonials_carousel', {
+            const selector = '.testimonials .testimonials_carousel';
+            const carousel = new Carousel(selector, {
               dragThreshold: false,
               swipeThreshold: false
             });

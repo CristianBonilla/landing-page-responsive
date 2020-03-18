@@ -11,7 +11,7 @@ export function animateByElement($element, name, loop) {
   if (loop) {
     $element.classList.add('loop');
   } else {
-    $element.addEventListener('animationend', () =>
+    $element.addEventListener('animationend', _ =>
       $element.classList.remove(animation),
       { once: true });
   }

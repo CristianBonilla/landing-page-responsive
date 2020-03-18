@@ -5,11 +5,10 @@ export class Scrolling {
 
   constructor($mainLink, [ ...$links ], navbarHeight = 0) {
     this._$mainLink = $mainLink;
-    this._anchors = $links.map($l => this._anchor($l));
+    this._anchors = $links.map($link => this._anchor($link));
     this._$currentLink = null;
     this._handler = null;
-    this._scrollListener = () =>
-      this.anchorCurrentPosition(false);
+    this._scrollListener = () => this.anchorCurrentPosition(false);
     this._navbarHeight = navbarHeight;
   }
 
@@ -26,8 +25,8 @@ export class Scrolling {
   }
 
   mount() {
-    this._$mainLink.addEventListener('click', e => {
-      e.preventDefault();
+    this._$mainLink.addEventListener('click', event => {
+      event.preventDefault();
       if (window.scrollY === 0) {
         return;
       }
@@ -42,8 +41,8 @@ export class Scrolling {
     });
 
     for (const anchor of this._anchors) {
-      anchor.$link.addEventListener('click', e => {
-        e.preventDefault();
+      anchor.$link.addEventListener('click', event => {
+        event.preventDefault();
         this.anchorScrolling(anchor);
       });
     }
@@ -79,7 +78,7 @@ export class Scrolling {
     const anchor = this._anchors.find(({ $anchor }) => {
       const { top, bottom } = this._distance($anchor);
 
-      return ~~top <= 1 && ~~bottom > 0;
+      return ~~top <= 0 && ~~bottom > 0;
     });
 
     return anchor;
