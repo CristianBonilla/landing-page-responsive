@@ -120,9 +120,9 @@ export class Carousel {
           bullets + `<button class="glide__bullet" data-glide-dir="=${ index }"></button>`, ''),
         mergeMap(bullets => {
           const html = !bullets.length ? '' : `
-            <div class="glide__bullets" data-glide-el="controls[nav]">${ t }</div>`;
+            <div class="glide__bullets" data-glide-el="controls[nav]">${ bullets }</div>`;
 
-          return html;
+          return of(html);
         }));
 
     return bulletsTemplate;
