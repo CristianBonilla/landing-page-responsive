@@ -4,32 +4,22 @@ const { empty, from, of, range } = rxjs;
 const { concatMapTo, defaultIfEmpty, mergeMap, reduce } = rxjs.operators;
 
 export class Carousel {
-  // Experimental class-fields
-  // _carouselOptionsDefault = {
-  //   type: 'carousel',
-  //   autoplay: 5000,
-  //   hoverpause: false,
-  //   gap: 0,
-  //   perView: 1,
-  //   rewindDuration: 1000,
-  //   animationDuration: 1000
-  // };
+  _carouselOptionsDefault = {
+    animationDuration: 1000,
+    autoplay: 5000,
+    dragThreshold: 120,
+    gap: 0,
+    hoverpause: false,
+    perView: 1,
+    rewindDuration: 1000,
+    swipeThreshold: 80,
+    type: 'carousel'
+  };
 
   constructor(selector, carouselOptions = { }) {
     this._selector = selector;
     this._$element = document.querySelector(this._selector);
     this._carouselOptions = carouselOptions;
-    this._carouselOptionsDefault = {
-      animationDuration: 1000,
-      autoplay: 5000,
-      dragThreshold: 120,
-      gap: 0,
-      hoverpause: false,
-      perView: 1,
-      rewindDuration: 1000,
-      swipeThreshold: 80,
-      type: 'carousel'
-    };
   }
 
   static setAutoHeight(Glide, { Html }, events) {

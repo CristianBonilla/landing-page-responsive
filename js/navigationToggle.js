@@ -1,17 +1,13 @@
 export class Toggle {
-  // Experimental class-fields
-  // _$html = document.documentElement;
-  // _$isVisible = false;
-  // _handler = null;
+  _$html = document.documentElement;
+  _$isVisible = false;
+  _handler = null;
 
   constructor($toggler, $menuContent, mediaQuery) {
     this._$toggler = $toggler;
     this._$nav = this._$toggler.parentNode;
     this._$menuContent = $menuContent;
     this._mediaQuery = mediaQuery;
-    this._$html = document.documentElement;
-    this._$isVisible = false;
-    this._handler = null;
   }
 
   get isVisible() {
