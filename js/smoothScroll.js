@@ -1,14 +1,11 @@
 export class Scrolling {
-  // Experimental class-fields
-  // _$currentLink = null;
-  // _handler = null;
+  _$currentLink = null;
+  _handler = null;
+  _scrollListener = () => this.anchorCurrentPosition(false);
 
   constructor($mainLink, [ ...$links ], navbarHeight = 0) {
     this._$mainLink = $mainLink;
     this._anchors = $links.map($link => this._anchor($link));
-    this._$currentLink = null;
-    this._handler = null;
-    this._scrollListener = () => this.anchorCurrentPosition(false);
     this._navbarHeight = navbarHeight;
   }
 
