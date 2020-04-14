@@ -1,15 +1,17 @@
 @import 'mixins/common';
-@import 'mixins/shadow';
 @import 'mixins/button';
+@import 'mixins/shadow';
 
 @import 'base/variables';
 @import 'base/misc';
 @import 'base/glide';
 @import 'base/animations';
 
-@import 'themes/trueno';
+@import 'themes/flaticon';
 @import 'themes/icomoon';
+@import 'themes/trueno';
 
+@import 'modules/poster';
 @import 'modules/card';
 @import 'modules/form';
 

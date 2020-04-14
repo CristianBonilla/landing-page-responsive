@@ -18,6 +18,19 @@
   &_carousel {
     display: flex;
     align-items: center;
+    justify-content: center;
+  }
+
+  &_content {
+    @media (min-width: 768px) {
+      padding-right: 2rem;
+      padding-left: 2rem;
+    }
+
+    @media (min-width: 992px) {
+      padding-left: 4rem;
+      padding-right: 6rem;
+    }
   }
 
   &_image {
@@ -35,17 +48,19 @@
   }
 
   &_title {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    margin-bottom: .5rem;
+    @include section-title {
+      justify-content: flex-start;
+      align-items: flex-start;
+      margin: 0 0 .5rem;
 
-    >h4 {
-      font-size: $title-size;
-      font-family: $trueno-family-eb;
-      line-height: 1.2;
-      margin: 0;
-    }
+      >h4 {
+        font-size: $title-size;
+      }
+
+      @media (max-width: 575px) {
+        text-align: center;
+      }
+    };
   }
 
   &_text {
@@ -77,10 +92,8 @@
   }
 
   // .card { }
-}
 
-@media (min-width: 576px) {
-  .prototypes {
+  @media (min-width: 576px) {
     min-height: calc(100vh - 46px);
 
     &_carousel,
@@ -89,26 +102,17 @@
     }
 
     &_carousel {
-      flex: 0 0 55%;
-      max-width: 55%;
+      flex: 0 0 50%;
+      max-width: 50%;
     }
 
     &_content {
-      flex: 0 0 45%;
-      max-width: 45%;
+      flex: 0 0 50%;
+      max-width: 50%;
     }
   }
-}
 
-@media (min-width: 768px) {
-  .prototypes_content {
-    padding-right: 2rem;
-    padding-left: 2rem;
-  }
-}
-
-@media (min-width: 992px) {
-  .prototypes_content {
-    padding-right: 8rem;
+  @media (min-height: 813px) {
+    min-height: auto;
   }
 }

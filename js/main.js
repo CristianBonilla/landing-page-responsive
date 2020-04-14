@@ -62,7 +62,7 @@ DOManimation({
 
 // Carousel
 
-// const carouselAutoHeight = Carousel.setAutoHeight;
+// const carouselAutoHeight = Carousel.autoHeight;
 
 const prototypesImagesTemplate = prototypesImages.map(path => `
   <figure class="prototypes_image">
