@@ -5,17 +5,7 @@
   padding: 3rem 0;
 
   &_title {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 0 3rem;
-
-    >h4 {
-      font-size: $title-size-l;
-      font-family: $trueno-family-eb;
-      line-height: 1.2;
-      margin: 0;
-    }
+    @include section-title;
   }
 
   &_container {
@@ -30,11 +20,20 @@
   &_content {
     position: relative;
     width: 100%;
+
+    @media (min-width: 576px) {
+      flex: 0 0 50%;
+      max-width: 50%;
+      padding-left: 2rem;
+      padding-right: 2rem;
+      margin: .5rem 0;
+    }
   }
 
   &_carousel {
     display: flex;
     align-items: center;
+    justify-content: center;
     margin-bottom: .5rem;
   }
 
@@ -59,7 +58,17 @@
 
     &_more {
       @include landing-button;
+
       margin-top: .5rem;
+    }
+
+    @media (min-width: 992px) {
+      padding-left: 4rem;
+      padding-right: 6rem;
+
+      &_title {
+        font-size: $title-size-l;
+      }
     }
   }
 
@@ -76,25 +85,8 @@
       max-height: 300px;
     }
   }
-}
 
-@media (min-width: 576px) {
-  .about-us {
-
-    &_carousel,
-    &_content {
-      flex: 0 0 50%;
-      max-width: 50%;
-      padding-left: 2rem;
-      padding-right: 2rem;
-      margin: .5rem 0;
-    }
-  }
-}
-
-@media (min-width: 768px) {
-  .about-us {
-
+  @media (min-width: 768px) {
     &_carousel {
       padding-left: 3rem;
       padding-right: 3rem;
@@ -105,18 +97,8 @@
       padding-right: 3rem;
     }
   }
-}
 
-@media (min-width: 992px) {
-  .about-us {
-
-    &_content {
-      padding-left: 6rem;
-      padding-right: 8rem;
-
-      &_title {
-        font-size: $title-size-l;
-      }
-    }
+  @media (min-height: 813px) {
+    min-height: auto;
   }
 }

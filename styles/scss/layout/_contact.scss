@@ -5,17 +5,7 @@
   background-color: transparent;
 
   &_title {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 0 3rem;
-
-    >h4 {
-      font-size: $title-size-l;
-      font-family: $trueno-family-eb;
-      line-height: 1.2;
-      margin: 0;
-    }
+    @include section-title;
   }
 
   &_content {
@@ -35,10 +25,12 @@
 
     // .form { }
   }
-}
 
-@media (min-width: 576px) {
-  .contact {
+  @media (min-width: 576px) {
     min-height: calc(100vh - 46px);
+  }
+
+  @media (min-height: 813px) {
+    min-height: auto;
   }
 }

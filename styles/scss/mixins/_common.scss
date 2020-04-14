@@ -17,7 +17,6 @@
 @mixin animation {
   animation-fill-mode: both;
   animation-delay: 500ms;
-  @content;
 
   &.loop {
     animation-iteration-count: infinite;
@@ -28,4 +27,6 @@
     transition-duration: 1ms !important;
     animation-iteration-count: 1 !important;
   }
+
+  @content;
 }

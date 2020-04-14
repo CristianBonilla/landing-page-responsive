@@ -31,6 +31,23 @@ export class Carousel {
 
   _template = '<div class="glide">|content|</div>';
 
+  static autoHeight(Glide, { Html }, events) {
+    const extend = {
+      mount() {
+        Html.track.classList.add('auto-height');
+        imagesLoaded(Html.track, this.set);
+      },
+      set() {
+        const slide = Html.slides[Glide.index];
+        const height = slide.offsetHeight;
+        Html.track.style.height = `${ height }px`;
+      }
+    };
+    events.on([ 'run', 'resize' ], extend.set);
+
+    return extend;
+  }
+
   constructor(selector, carouselOptions = { }) {
     this.selector = selector;
     this.$element = document.querySelector(this.selector);
