@@ -1,3 +1,6 @@
+const { defer, from, Observable, of } = rxjs;
+const { mergeMap, toArray } = rxjs.operators;
+
 export const animationNames = [
   'slide',
   'rubber',
@@ -5,30 +8,61 @@ export const animationNames = [
   'zoom'
 ];
 
-export function animateByElement($element, name, loop) {
-  const animation = `animate_${ name }`;
-  $element.classList.add(animation);
-  if (loop) {
-    $element.classList.add('loop');
-  } else {
-    $element.addEventListener('animationend', _ =>
-      $element.classList.remove(animation),
-      { once: true });
-  }
+function displayed($element) {
+  const { offsetParent } = $element;
+  const { display } = window.getComputedStyle($element);
+
+  return offsetParent && display !== 'none';
 }
 
-export function animate(...sources) {
-  for (const { $el, name, loop, mediaQuery } of sources) {
-    if (Array.isArray($el)) {
-      const recursion = $el.map($el => {
-        return { $el, name, loop };
-      });
-      animate(...recursion);
-      continue;
+function animationStart($element) {
+  const start$ = new Observable(subscriber => {
+    $element.addEventListener('animationstart', _ => {
+      subscriber.next($element);
+      subscriber.complete();
+    }, { once: true });
+  });
+
+  return start$;
+}
+
+export function animateElement({ $elements: $element, animationName, loop, mediaQuery }) {
+  const element$ = defer(() => {
+    $element.classList.remove('hide-animation');
+
+    if (!displayed($element) || mediaQuery && !mediaQuery.matches) {
+      return of($element);
     }
 
-    if (!mediaQuery || mediaQuery && mediaQuery.matches) {
-      animateByElement($el, name, loop);
+    const animationClass = `animate_${ animationName }`;
+    $element.classList.add(animationClass);
+
+    if (loop) {
+      $element.classList.add('loop');
+    } else {
+      $element.addEventListener('animationend', _ =>
+        $element.classList.remove(animationClass),
+      { once: true });
     }
-  }
+
+    return animationStart($element);
+  });
+
+  return element$;
+}
+
+const isElementsArray = ({ $elements }) => Array.isArray($elements);
+
+export default function animate(...elements) {
+  const animationsStart$ = from(elements)
+    .pipe(
+      mergeMap(element => !isElementsArray(element) ?
+        animateElement(element) :
+        from(element.$elements)
+          .pipe(
+            mergeMap($element =>
+              animateElement({ ...element, ...{ $elements: $element } })))),
+      toArray());
+
+  return animationsStart$;
 }

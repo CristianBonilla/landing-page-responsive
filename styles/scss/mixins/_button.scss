@@ -10,6 +10,7 @@
   background-position: 100% 0;
   background-size: 201% 100%;
   transition: all 400ms ease-in;
+
   @include cyan-shadow;
 
   &:hover,

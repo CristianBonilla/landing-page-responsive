@@ -1,12 +1,16 @@
-export class Scrolling {
+class Scrolling {
   _$currentLink = null;
   _handler = null;
-  _scrollListener = () => this.anchorCurrentPosition(false);
+  _scrollListener = _ => this.anchorCurrentPosition(false);
 
-  constructor($mainLink, [ ...$links ], navbarHeight = 0) {
-    this._$mainLink = $mainLink;
-    this._anchors = $links.map($link => this._anchor($link));
+  constructor($mainLink, $links, navbarHeight) {
+    this.$mainLink = $mainLink;
+    this.anchors = $links.map($link => this.anchor($link));
     this._navbarHeight = navbarHeight;
+  }
+
+  get scrollListener() {
+    return this._scrollListener;
   }
 
   get navbarHeight() {
@@ -17,45 +21,16 @@ export class Scrolling {
     this._navbarHeight = navHeight;
   }
 
+  get handler() {
+    return this._handler;
+  }
+
   set handler(handler) {
     this._handler = handler;
   }
 
-  mount() {
-    this._$mainLink.addEventListener('click', event => {
-      event.preventDefault();
-      if (window.scrollY === 0) {
-        return;
-      }
-      window.scrollTo({
-        behavior: 'smooth',
-        left: 0,
-        top: 0
-      });
-      if (typeof this._handler === 'function') {
-        this._handler(this._$mainLink, null);
-      }
-    });
-
-    for (const anchor of this._anchors) {
-      anchor.$link.addEventListener('click', event => {
-        event.preventDefault();
-        this.anchorScrolling(anchor);
-      });
-    }
-
-    const anchor = this.anchorByHref(location.href);
-    if (anchor) {
-      this.anchorScrolling(anchor);
-    } else {
-      this.anchorCurrentPosition(false);
-    }
-
-    window.addEventListener('scroll', this._scrollListener);
-  }
-
   resetLinksActive() {
-    for (const { $link } of this._anchors) {
+    for (const { $link } of this.anchors) {
       if ($link !== this._$currentLink) {
         $link.classList.remove('active');
       } else {
@@ -72,8 +47,8 @@ export class Scrolling {
   }
 
   anchorScrollingPosition() {
-    const anchor = this._anchors.find(({ $anchor }) => {
-      const { top, bottom } = this._distance($anchor);
+    const anchor = this.anchors.find(({ $anchor }) => {
+      const { top, bottom } = this.distance($anchor);
 
       return ~~top <= 0 && ~~bottom > 0;
     });
@@ -81,14 +56,17 @@ export class Scrolling {
     return anchor;
   }
 
+
   anchorScrolling(anchor) {
     const { $link, $anchor } = anchor;
-    if (!this._isPathnameCorrect($link) || this._$currentLink === $link) {
+
+    if (!this.isPathnameCorrect($link) || this._$currentLink === $link) {
       return;
     }
     if ($anchor) {
       window.removeEventListener('scroll', this._scrollListener);
       this.anchorActive(anchor);
+
       if (typeof this._handler === 'function') {
         this._handler($link, $anchor);
       }
@@ -98,28 +76,29 @@ export class Scrolling {
   anchorActive({ $anchor, $link, id }, smooth = true) {
     this._$currentLink = $link;
     this.resetLinksActive();
+
     if (smooth) {
-      this._scrolling(id, $anchor);
+      this.scrolling(id, $anchor);
     } else {
-      this._history(id, $anchor);
+      this.history(id, $anchor);
     }
   }
 
   anchorByHref(href) {
-    const anchor = this._anchors.find(({ $link }) => $link.href === href);
+    const anchor = this.anchors.find(({ $link }) => $link.href === href);
 
     return anchor;
   }
 
-  _anchor($link) {
+  anchor($link) {
     const id = $link.getAttribute('href');
     const $anchor = document.querySelector(id);
 
     return { $anchor, $link, id };
   }
 
-  _scrolling(id, $anchor) {
-    const { top } = this._distance($anchor);
+  scrolling(id, $anchor) {
+    const { top } = this.distance($anchor);
     window.scrollBy({
       behavior: 'smooth',
       left: 0,
@@ -127,21 +106,22 @@ export class Scrolling {
     });
 
     const checkIfDone = setInterval(() => {
-      const { top } = this._distance($anchor);
-      if (~~top === 0 || this._atBottom()) {
-        this._history(id, $anchor);
+      const { top } = this.distance($anchor);
+
+      if (~~top === 0 || this.atBottom()) {
+        this.history(id, $anchor);
         window.addEventListener('scroll', this._scrollListener);
         clearInterval(checkIfDone);
       }
     }, 100);
   }
 
-  _history(id, $anchor) {
+  history(id, $anchor) {
     $anchor.focus();
     // window.history.pushState('', '', id);
   }
 
-  _distance($anchor) {
+  distance($anchor) {
     let { top, bottom } = $anchor.getBoundingClientRect();
 
     if (this._navbarHeight > 0) {
@@ -154,21 +134,72 @@ export class Scrolling {
     }
 
     return {
-      top: top,
-      bottom: bottom
+      top,
+      bottom
     };
   }
 
-  _atBottom() {
+  atBottom() {
     return window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 2;
   }
 
-  _isPathnameCorrect($link) {
+  isPathnameCorrect($link) {
     const hasHref = $link.href && $link.href.indexOf('#') >= 0;
     const pathname = location.pathname;
     const equalPathname = $link.pathname === pathname || ('/' + $link.pathname) === pathname;
     const equalSearch = $link.search === location.search;
 
     return hasHref && equalPathname && equalSearch;
+  }
+}
+
+export class SmoothScroll {
+  _initialScrollY = 0;
+
+  constructor($mainLink, [ ...$links ], navbarHeight = 0) {
+    this._factory = new Scrolling($mainLink, $links, navbarHeight);
+    this.$mainLink = $mainLink;
+  }
+
+  get initialScrollY() {
+    return this._initialScrollY;
+  }
+
+  mount() {
+    this.$mainLink.addEventListener('click', event => {
+      event.preventDefault();
+
+      if (window.scrollY === 0) {
+        return;
+      }
+      window.scrollTo({
+        behavior: 'smooth',
+        left: 0,
+        top: 0
+      });
+      if (typeof this._factory.handler === 'function') {
+        this._factory.handler(this.$mainLink, null);
+      }
+    });
+
+    const anchors = this._factory.anchors;
+    for (const anchor of anchors) {
+      anchor.$link.addEventListener('click', event => {
+        event.preventDefault();
+        this._factory.anchorScrolling(anchor);
+      });
+    }
+
+    const anchor = this._factory.anchorByHref(location.href);
+    if (anchor) {
+      this._factory.anchorScrolling(anchor);
+    } else {
+      this._factory.anchorCurrentPosition(false);
+    }
+
+    this._initialScrollY = window.scrollY;
+    window.addEventListener('scroll', this._factory.scrollListener);
+
+    return this._factory;
   }
 }
