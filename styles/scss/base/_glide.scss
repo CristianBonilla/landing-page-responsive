@@ -1,5 +1,6 @@
 .glide {
   $glide: &;
+  padding-bottom: 2rem;
 
   &:not(&--not--draggable) {
     cursor: grab;
@@ -27,8 +28,8 @@
 
   &__bullets {
     position: absolute;
-    bottom: -1.5rem;
     left: 50%;
+    bottom: .3rem;
     display: inline-flex;
     transform: translateX(-50%);
 

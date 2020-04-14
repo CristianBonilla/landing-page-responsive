@@ -1,9 +1,10 @@
-// DOM interaction
-import { Toggle } from './navigationToggle.js';
-import { Scrolling } from './smoothScroll.js';
+// DOM Interaction
+
+import { NavigationToggle } from './navigationToggle.js';
+import { SmoothScroll } from './smoothScroll.js';
 import { prototypesImages, aboutImages, testimonialsImages } from './imagePaths.js';
 import { Carousel } from './carousel.js';
-import { animate } from './animate.js';
+import DOManimation from './animate.js';
 
 const $toggler = document.getElementById('navigation_toggler');
 const $content = document.querySelector('.navigation_content');
@@ -13,17 +14,51 @@ const $mainLink = document.getElementById('navigation_title');
 
 const mediaQuery = window.matchMedia('(max-width: 575px)');
 
-const toggle = new Toggle($toggler, $content, mediaQuery);
-toggle.mount();
-const scrolling = new Scrolling($mainLink, $links, toggle.navbarHeight());
-scrolling.mount();
+const toggle = new NavigationToggle($toggler, $content, mediaQuery);
+const toggleMount = toggle.mount();
 
-scrolling.handler = () => {
-  if (toggle.isVisible) {
-    toggle.hide();
+const scrolling = new SmoothScroll($mainLink, $links, toggleMount.navbarHeight());
+const scrollingMount = scrolling.mount();
+
+scrollingMount.handler = () => {
+  if (toggleMount.isVisible) {
+    toggleMount.hide();
   }
 };
-toggle.handler = () => scrolling.navbarHeight = toggle.navbarHeight();
+
+toggleMount.handler = () => {
+  scrollingMount.navbarHeight = toggleMount.navbarHeight();
+};
+
+
+// DOM Animations
+
+const $titles = document.querySelectorAll('.animate_title');
+const $home = document.querySelector('.home');
+const $intro = $home.querySelector('.home_intro');
+const $image = $home.querySelector('.home_image');
+
+DOManimation({
+  $elements: $menu,
+  animationName: 'slide',
+  mediaQuery: window.matchMedia('(min-width: 576px)')
+}, {
+  $elements: [ ...$titles ],
+  animationName: 'rubber',
+  loop: true
+}, {
+  $elements: $intro,
+  animationName: 'outBox'
+}, {
+  $elements: $image,
+  animationName: 'zoom'
+}).subscribe(_ => {
+  const { initialScrollY } = scrolling;
+  const scrollY = window.scrollY;
+  if (scrollY !== initialScrollY) {
+    window.scrollTo(0, initialScrollY);
+  }
+});
 
 // const carouselAutoHeight = Carousel.setAutoHeight;
 
@@ -46,29 +81,6 @@ const about = aboutCarousel.mount(
   aboutTemplate,
   false
   /* { carouselAutoHeight } */);
-
-// DOM animations
-
-const $titles = document.querySelectorAll('.animate_title');
-const $home = document.querySelector('.home');
-const $intro = $home.querySelector('.home_intro');
-const $image = $home.querySelector('.home_image');
-
-animate({
-  $el: $menu,
-  name: 'slide',
-  mediaQuery: window.matchMedia('(min-width: 576px)')
-}, {
-  $el: [ ...$titles ],
-  name: 'rubber',
-  loop: true
-}, {
-  $el: $intro,
-  name: 'outBox'
-}, {
-  $el: $image,
-  name: 'zoom'
-});
 
 // Testimonials
 

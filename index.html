@@ -5,10 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta name="author" content="Cristian Bonilla">
-    <meta name="description" content="Landing page responsive con HTML5, SCSS, JavaScript ES6+">
+    <meta name="description" content="Landing page responsive with HTML5, SCSS, JavaScript ES6+ and RxJS">
     <meta name="docsearch:language" content="es">
     <meta name="docsearch:version" content="1.0.0">
-    <title>Landing Page</title>
+    <title>Landing Page Responsive</title>
     <link type="image/x-icon" rel="shortcut icon" href="assets/favicon.ico">
     <link type="text/css" rel="stylesheet" href="styles/css/base/normalize.css">
     <link type="text/css" rel="stylesheet" href="styles/css/base/glide.core.css">
@@ -19,14 +19,13 @@
       <strong>Lo sentimos pero el "landing page responsive" no funciona sin JavaScript habilitado. Por favor, activelo para continuar</strong>
     </noscript>
     <div class="wrapper">
-      <!-- Navigation -->
       <nav class="navigation">
         <a href="" id="navigation_title" class="navigation_title">Landerz<b>.</b></a>
         <button type="button" id="navigation_toggler" class="navigation_toggler">
           <i class="icon-navicon"></i>
         </button>
         <div class="navigation_content">
-          <ul class="navigation_menu">
+          <ul class="navigation_menu hide-animation">
             <li class="navigation_menu_item">
               <a href="#home">Home</a>
             </li>
@@ -52,18 +51,18 @@
       <main id="home" class="home">
         <header class="header">
           <div class="header_title">
-            <h2 class="animate_title">Landerz<b>.</b></h2>
+            <h2 class="animate_title hide-animation">Landerz<b>.</b></h2>
           </div>
         </header>
         <div class="home_content">
-          <div class="home_intro">
+          <div class="home_intro hide-animation">
             <h1 class="home_intro_title">Grow Your Business Faster</h1>
             <p class="home_intro_description">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius corrupti velit soluta repellendus?
             </p>
             <button type="button" class="home_intro_started">Get Started</button>
           </div>
-          <figure class="home_image">
+          <figure class="home_image hide-animation">
             <img src="assets/images/landing_1.png" alt="">
           </figure>
         </div>
@@ -71,7 +70,7 @@
       <!-- Features -->
       <section id="features" class="features">
         <div class="features_title">
-          <h4 class="animate_title">Features</h4>
+          <h4 class="animate_title hide-animation">Features</h4>
         </div>
         <div class="features_content">
           <article class="poster">
@@ -177,7 +176,7 @@
         <div class="prototypes_carousel"></div>
         <div class="prototypes_content">
           <div class="prototypes_title">
-            <h4 class="animate_title">Create interactive prototypes</h4>
+            <h4 class="animate_title hide-animation">Create interactive prototypes</h4>
           </div>
           <p class="prototypes_text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit ducimus ab, harum tempore laborum excepturi!</p>
           <ul class="prototypes_list">
@@ -214,7 +213,7 @@
       <!-- About Us -->
       <section id="about-us" class="about-us">
         <div class="about-us_title">
-          <h4 class="animate_title">About Us</h4>
+          <h4 class="animate_title hide-animation">About Us</h4>
         </div>
         <div class="about-us_container">
           <div class="about-us_carousel"></div>
@@ -230,14 +229,14 @@
       <!-- Testimonials -->
       <section id="testimonials" class="testimonials">
         <div class="testimonials_title">
-          <h4 class="animate_title">Testimonials</h4>
+          <h4 class="animate_title hide-animation">Testimonials</h4>
         </div>
         <div class="testimonials_carousel"></div>
       </section>
       <!-- Contact -->
       <section id="contact" class="contact">
         <div class="contact_title">
-          <h4 class="animate_title">Get In Touch</h4>
+          <h4 class="animate_title hide-animation">Get In Touch</h4>
         </div>
         <div class="contact_content">
           <h5 class="contact_content_title">Contact Form</h5>
