@@ -16,50 +16,52 @@ export class Carousel {
     type: 'carousel'
   };
 
+  _bulletsTemplate = {
+    bullet: '<button class="glide__bullet" data-glide-dir="=|index|"></button>',
+    bullets: '<div class="glide__bullets" data-glide-el="controls[nav]">|bullets|</div>'
+  };
+
+  _trackTemplate = {
+    slide: '<li class="glide__slide">|item|</li>',
+    track: `
+      <div class="glide__track" data-glide-el="track">
+        <ul class="glide__slides">|slides|</ul>
+      </div>`
+  };
+
+  _template = '<div class="glide">|content|</div>';
+
   constructor(selector, carouselOptions = { }) {
-    this._selector = selector;
-    this._$element = document.querySelector(this._selector);
-    this._carouselOptions = carouselOptions;
-  }
-
-  static setAutoHeight(Glide, { Html }, events) {
-    const extend = {
-      mount() {
-        Html.track.classList.add('auto-height');
-        imagesLoaded(Html.track, this.set);
-      },
-      set() {
-        const slide = Html.slides[Glide.index];
-        const height = slide.offsetHeight;
-        Html.track.style.height = `${ height }px`;
-      }
-    };
-    events.on([ 'run', 'resize' ], extend.set);
-
-    return extend;
+    this.selector = selector;
+    this.$element = document.querySelector(this.selector);
+    this.carouselOptions = carouselOptions;
   }
 
   mount(items, includeBullets, modules = { }) {
-    const carousel = this._carouselTemplate(items, includeBullets)
+    const carousel$ = this.carouselTemplate(items, includeBullets)
       .pipe(
         mergeMap(html => {
-          this._$element.innerHTML = html;
+          this.$element.innerHTML = html;
 
-          return this._carouselInstance(modules);
+          return this.carousel(modules, includeBullets);
         }),
         defaultIfEmpty(null));
 
-    return carousel;
+    return carousel$;
   }
 
-  _carouselInstance(modules) {
-    const selector = `${ this._selector }>.glide`;
+  carousel(modules, includeBullets) {
+    const selector = `${ this.selector }>.glide`;
     const options = {
       ...this._carouselOptionsDefault,
-      ...this._carouselOptions
-    }
+      ...this.carouselOptions
+    };
+
     const carousel = new Glide(selector, options);
-    carousel.mount(modules);
+    const carouselMount = carousel.mount({
+      ...modules,
+      ...(includeBullets ? { bulletActive: this._bulletActive } : { })
+    });
 
     const { dragThreshold, swipeThreshold } = options;
     if (!dragThreshold || !swipeThreshold) {
@@ -67,54 +69,82 @@ export class Carousel {
         .classList.add('glide--not--draggable');
     }
 
-    return of(carousel);
+    return of(carouselMount);
   }
 
-  _carouselTemplate(items, includeBullets) {
+  carouselTemplate(items, includeBullets) {
     const bulletsAmount = includeBullets ? items.length : 0;
-    const template = this._trackCarouselTemplate(items)
+    const template$ = this.trackCarouselTemplate(items)
       .pipe(
         concatMapTo(
-          this._bulletsCarouselTemplate(bulletsAmount),
+          this.bulletsCarouselTemplate(bulletsAmount),
           (content, bullets) => content + bullets),
         mergeMap(content => {
-          const html = !content.length ? empty() : of(`<div class="glide">${ content }</div>`);
+          const html = !content.length ? empty() : of(this._template.replace('|content|', content));
 
           return html;
         }));
 
-    return template;
+    return template$;
   }
 
-  _trackCarouselTemplate(items) {
-    const trackTemplate = from(items)
+  trackCarouselTemplate(items) {
+    const { slide, track } = this._trackTemplate;
+    const trackTemplate$ = from(items)
       .pipe(
         reduce((slides, item) =>
-          slides + `<li class="glide__slide">${ item }</li>`, ''),
+          slides + slide.replace('|item|', item), ''),
         mergeMap(slides => {
-          const html = !slides.length ? '' : `
-            <div class="glide__track" data-glide-el="track">
-              <ul class="glide__slides">${ slides }</ul>
-            </div>`;
+          const html = !slides.length ? '' : track.replace('|slides|', slides);
 
           return of(html);
         }));
 
-    return trackTemplate;
+    return trackTemplate$;
   }
 
-  _bulletsCarouselTemplate(amount) {
-    const bulletsTemplate = range(0, amount)
+  bulletsCarouselTemplate(bulletsAmount) {
+    const { bullet, bullets } = this._bulletsTemplate;
+    const bulletsTemplate$ = range(0, bulletsAmount)
       .pipe(
-        reduce((bullets, index) =>
-          bullets + `<button class="glide__bullet" data-glide-dir="=${ index }"></button>`, ''),
-        mergeMap(bullets => {
-          const html = !bullets.length ? '' : `
-            <div class="glide__bullets" data-glide-el="controls[nav]">${ bullets }</div>`;
+        reduce((bulletButton, index) =>
+          bulletButton + bullet.replace('|index|', index), ''),
+        mergeMap(bulletButton => {
+          const html = !bulletButton.length ? '' : bullets.replace('|bullets|', bulletButton);
 
           return of(html);
         }));
 
-    return bulletsTemplate;
+    return bulletsTemplate$;
+  }
+
+  _bulletActive(Glide, { Html }, events) {
+    const extend = {
+      bulletActive: 'glide__bullet--active',
+      bullets: null,
+      index: 0,
+      previousIndex: -1,
+      mount() {
+        this.bullets = Html.root.querySelector('.glide__bullets').children;
+      }
+    };
+
+    events.on('run.before', _ => {
+      extend.previousIndex = Glide.index;
+    });
+
+    events.on([ 'mount.after', 'run' ], _ => {
+      extend.index = Glide.index;
+      const { bulletActive, bullets, previousIndex, index } = extend;
+      if (previousIndex >= 0 && index >= 0) {
+        const previousBullet = bullets.item(previousIndex);
+        const bullet = bullets.item(index);
+
+        previousBullet.classList.remove(bulletActive);
+        bullet.classList.add(bulletActive);
+      }
+    });
+
+    return extend;
   }
 }
