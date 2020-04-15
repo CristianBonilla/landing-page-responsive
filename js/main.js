@@ -76,7 +76,7 @@ const aboutImagesTemplate = aboutImages.map(path => `
     <img src="${ path }" alt="">
   </figure>`);
 const aboutCarousel = new Carousel('.about-us .about-us_carousel');
-const about$ = aboutCarousel.mount(aboutImagesTemplate, false  /* { carouselAutoHeight } */);
+const about$ = aboutCarousel.mount(aboutImagesTemplate, false /* { carouselAutoHeight } */);
 
 const { zip } = rxjs;
 

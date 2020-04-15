@@ -18,9 +18,18 @@
     "yarn": ">=1.17.0"
   },
   "scripts": {
+    "lint": "eslint -c ./.eslintrc --ext .js ./js",
     "sass": "sass styles/scss:styles/css --style=compressed --charset --embed-sources --watch --stop-on-error"
   },
   "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prefer-arrow": "^1.2.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
     "sass": "^1.24.4"
   }
 }
