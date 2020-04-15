@@ -30,7 +30,7 @@
     min-height: calc(100vh - 46px);
   }
 
-  @media (min-height: 813px) {
+  @media (max-width: 575px) and (min-height: 900), (min-width: 576px) and (min-height: 700px) {
     min-height: auto;
   }
 }
