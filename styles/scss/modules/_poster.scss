@@ -66,17 +66,13 @@
       color: $cyan-transition-color;
     }
   }
-}
 
-@media (min-width: 576px) {
-  .poster {
+  @media (min-width: 576px) {
     max-width: 320px;
     margin: 0 .5rem 1rem;
   }
-}
 
-@media (min-width: 768px) {
-  .poster {
+  @media (min-width: 768px) {
     max-width: 400px;
   }
 }

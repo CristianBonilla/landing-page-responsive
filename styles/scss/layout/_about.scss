@@ -20,14 +20,6 @@
   &_content {
     position: relative;
     width: 100%;
-
-    @media (min-width: 576px) {
-      flex: 0 0 50%;
-      max-width: 50%;
-      padding-left: 2rem;
-      padding-right: 2rem;
-      margin: .5rem 0;
-    }
   }
 
   &_carousel {
@@ -61,15 +53,6 @@
 
       margin-top: .5rem;
     }
-
-    @media (min-width: 992px) {
-      padding-left: 4rem;
-      padding-right: 6rem;
-
-      &_title {
-        font-size: $title-size-l;
-      }
-    }
   }
 
   &_image {
@@ -86,6 +69,17 @@
     }
   }
 
+  @media (min-width: 576px) {
+    &_carousel,
+    &_content {
+      flex: 0 0 50%;
+      max-width: 50%;
+      padding-left: 2rem;
+      padding-right: 2rem;
+      margin: .5rem 0;
+    }
+  }
+
   @media (min-width: 768px) {
     &_carousel {
       padding-left: 3rem;
@@ -98,7 +92,18 @@
     }
   }
 
-  @media (max-width: 575px) and (min-height: 900), (min-width: 576px) and (min-height: 700px) {
+  @media (min-width: 992px) {
+    &_content {
+      padding-left: 4rem;
+      padding-right: 6rem;
+
+      &_title {
+        font-size: $title-size-l;
+      }
+    }
+  }
+
+  @media (max-width: 575px) and (min-height: 900px), (min-width: 576px) and (min-height: 700px) {
     min-height: auto;
   }
 }

@@ -50,11 +50,8 @@
       }
     }
   }
-}
 
-@media (min-width: 576px) {
-  .glide {
-
+  @media (min-width: 576px) {
     &__bullet {
 
       &#{ & }:not(&--active):hover {

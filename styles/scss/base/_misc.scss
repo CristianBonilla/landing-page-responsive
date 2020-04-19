@@ -52,10 +52,8 @@ button {
   height: auto;
   padding-bottom: 54px;
   margin: 0;
-}
 
-@media (min-width: 576px) {
-  .wrapper {
+  @media (min-width: 576px) {
     min-height: calc(100vh - 46px);
   }
 }

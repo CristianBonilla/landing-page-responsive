@@ -21,18 +21,6 @@
     justify-content: center;
   }
 
-  &_content {
-    @media (min-width: 768px) {
-      padding-right: 2rem;
-      padding-left: 2rem;
-    }
-
-    @media (min-width: 992px) {
-      padding-left: 4rem;
-      padding-right: 6rem;
-    }
-  }
-
   &_image {
     position: relative;
     width: 100%;
@@ -109,6 +97,20 @@
     &_content {
       flex: 0 0 50%;
       max-width: 50%;
+    }
+  }
+
+  @media (min-width: 768px) {
+    &_content {
+      padding-right: 2rem;
+      padding-left: 2rem;
+    }
+  }
+
+  @media (min-width: 992px) {
+    &_content {
+      padding-left: 4rem;
+      padding-right: 6rem;
     }
   }
 

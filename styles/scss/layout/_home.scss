@@ -39,10 +39,6 @@
     &_started {
       @include landing-button;
     }
-
-    @media (min-width: 1200px) {
-      padding: 0 6rem 0 8rem;
-    }
   }
 
   &_image {
@@ -133,7 +129,15 @@
     }
   }
 
-  @media (max-width: 575px) and (min-height: 900), (min-width: 576px) and (min-height: 700px) {
+  @media (min-width: 1200px) {
+    &_intro {
+      padding: 0 6rem 0 8rem;
+    }
+  }
+}
+
+@media (max-width: 575px) and (min-height: 900), (min-width: 576px) and (min-height: 700px) {
+  .home {
     min-height: auto;
 
     &_content {
